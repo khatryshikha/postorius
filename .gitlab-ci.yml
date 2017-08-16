@@ -2,15 +2,24 @@ image: maxking/mailman-ci-runner
 
 django-1.8:
   script:
-  - tox -e py27-django18-head-coverage
+  - tox -e py27-django18-coverage
 
 django-1.9:
   script:
-  - tox -e py27-django19-head-coverage
+  - tox -e py27-django19-coverage
 
 django-1.10:
   script:
-  - tox -e py27-django110-head-coverage
+  - tox -e py27-django110-coverage
+
+django-1.11:
+  script:
+  - tox -e py27-django111-coverage
+
+django-1.11-head:
+  script:
+  - tox -e py27-django111-head-coverage
+  allow_failure: true
 
 pep8:
   script:
@@ -18,5 +27,5 @@ pep8:
 
 django-latest:
   script:
-  - tox -e py27-django-latest-head
+  - tox -e py27-django-latest
   allow_failure: true
