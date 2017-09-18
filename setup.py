@@ -50,7 +50,7 @@ setup(
         'Django>=1.8',
         'Django<1.12',
         'django-mailman3',
-        'mailmanclient',
+        'mailmanclient~=3.1.1a1'
     ],
     tests_require=[
         "mock",

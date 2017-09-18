@@ -23,7 +23,7 @@ from django import template
 from postorius.auth.utils import user_is_in_list_roster
 from postorius.models import List
 
-from mailmanclient._client import MailingList
+from mailmanclient import MailingList
 
 register = template.Library()
 
