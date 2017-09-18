@@ -17,13 +17,14 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import absolute_import, unicode_literals
+from django.utils.deprecation import MiddlewareMixin
 
 from postorius import utils
 from postorius.models import MailmanApiError
 from mailmanclient import MailmanConnectionError
 
 
-class PostoriusMiddleware(object):
+class PostoriusMiddleware(MiddlewareMixin):
 
     def process_exception(self, request, exception):
         if isinstance(exception, MailmanApiError) or isinstance(
