@@ -7,7 +7,7 @@ Installation
     GNU Mailman 3. To install GNU Mailman follow the instructions in the `documentation`_.
 
 
-.. _documentation: http://mailman.readthedocs.org
+.. _documentation: http://docs.mailman3.org/en/latest/
 
 Install Postorius
 =================
