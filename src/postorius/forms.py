@@ -142,7 +142,7 @@ class ListNew(forms.Form):
                         'invalid': _('Please enter a valid list name.')})
     mail_host = forms.ChoiceField()
     list_owner = forms.EmailField(
-        label=_('Inital list owner address'),
+        label=_('Initial list owner address'),
         error_messages={
             'required': _("Please enter the list owner's email address.")},
         required=True)
