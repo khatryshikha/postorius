@@ -888,12 +888,12 @@ class UserPreferences(forms.Form):
     receive_list_copy = forms.NullBooleanField(
         widget=NullBooleanRadioSelect(choices=choices),
         required=False,
-        label=_('Avoid Duplicates'),
+        label=_('Receive list copies (possible duplicates)'),
         help_text=_(
             'When you are listed explicitly in the To: or Cc: headers of a '
             'list message, you can opt to not receive another copy from the '
-            'mailing list. Select Yes to avoid receiving copies from the '
-            'mailing list; select No to receive copies. '))
+            'mailing list. Select No to receive copies. '
+            'Select Yes to avoid receiving copies from the mailing list'))
 
     class Meta:
 
