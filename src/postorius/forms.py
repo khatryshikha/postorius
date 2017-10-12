@@ -373,6 +373,13 @@ class MessageAcceptanceForm(ListSettingsForm):
             'is matched against the list of explicitly accepted, held, '
             'rejected (bounced), and discarded addresses. '
             'If no match is found, then this action is taken.'))
+    max_message_size = forms.IntegerField(
+        min_value=0,
+        label=_('Maximum message size'),
+        help_text=_(
+            'The maximum allowed message size. '
+            'This can be used to prevent emails with large attachments. '
+            'A size of 0 disables the check.'))
 
 
 class DigestSettingsForm(ListSettingsForm):
