@@ -37,12 +37,7 @@ logger = logging.getLogger(__name__)
 @receiver(post_save, sender=User)
 def create_mailman_user(sender, **kwargs):
     if kwargs.get('created'):
-        autocreate = False
-        try:
-            autocreate = settings.AUTOCREATE_MAILMAN_USER
-        except AttributeError:
-            pass
-        if autocreate:
+        if getattr(settings, 'AUTOCREATE_MAILMAN_USER', False):
             user = kwargs.get('instance')
             try:
                 MailmanUser.objects.create_from_django(user)
