@@ -235,9 +235,6 @@ class ListAnonymousSubscribe(forms.Form):
     display_name = forms.CharField(
         label=_('Your name (optional)'), required=False)
 
-    def __init__(self, *args, **kwargs):
-        super(ListAnonymousSubscribe, self).__init__(*args, **kwargs)
-
 
 class ListSettingsForm(forms.Form):
     """
