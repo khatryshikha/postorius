@@ -21,6 +21,7 @@ from __future__ import absolute_import, unicode_literals
 from django import forms
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 from django.utils.encoding import smart_text
 from django.utils.translation import ugettext_lazy as _
 from django.utils.version import get_complete_version
@@ -115,7 +116,7 @@ class DomainForm(forms.Form):
         mail_host = self.cleaned_data['mail_host']
         try:
             validate_email('mail@' + mail_host)
-        except:
+        except ValidationError:
             raise forms.ValidationError(_("Please enter a valid domain name"))
         return mail_host
 
@@ -179,7 +180,7 @@ class ListNew(forms.Form):
     def clean_listname(self):
         try:
             validate_email(self.cleaned_data['listname'] + '@example.net')
-        except:
+        except ValidationError:
             raise forms.ValidationError(_("Please enter a valid listname"))
         return self.cleaned_data['listname']
 
