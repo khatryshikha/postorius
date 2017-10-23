@@ -35,11 +35,11 @@ django-1.11-git:
   - tox -e py27-django111-head
   allow_failure: true
 
-django-latest:
-  stage: test
-  script:
-  - tox -e py27-django-latest
-  allow_failure: true
+#django-latest:
+#  stage: test
+#  script:
+#  - tox -e py27-django-latest
+#  allow_failure: true
 
 pages:
   stage: deploy
