@@ -42,7 +42,8 @@ def create_mailman_user(sender, **kwargs):
             try:
                 MailmanUser.objects.create_from_django(user)
             except (MailmanApiError, HTTPError):
-                pass
+                logger.error('Mailman user not created for {}'.format(user))
+                logger.error('Mailman Core API is not reachable.')
 
 
 class MailmanApiError(Exception):
