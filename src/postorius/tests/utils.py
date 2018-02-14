@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import, unicode_literals
 
 import os
 import vcr
@@ -23,8 +22,11 @@ import logging
 
 from django.conf import settings
 from django.contrib import messages
-from django.core.urlresolvers import reverse
-from django.test import TestCase
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
+from django.test import TransactionTestCase
 from mock import MagicMock
 from six import binary_type, text_type, PY3
 from six.moves.urllib_parse import (
@@ -37,13 +39,18 @@ vcr_log = logging.getLogger('vcr')
 vcr_log.setLevel(logging.WARNING)
 
 
+def get_test_file(*fileparts):
+    return os.path.join(os.path.dirname(__file__), "test_data", *fileparts)
+get_test_file.__test__ = False  # noqa: E305
+
+
 def reorder_request_params(request):
     def reorder_params(params):
         parsed = None
         if PY3:
             if isinstance(params, binary_type):
                 params = params.decode("ascii")
-                parsed = parse_qsl(params, encoding="utf-8")
+            parsed = parse_qsl(params, encoding="utf-8")
         else:
             parsed = parse_qsl(params)
         if parsed:
@@ -79,6 +86,16 @@ def filter_response_headers(response):
 
 
 def get_vcr(**kwargs):
+    # Use the POSTORIUS_VCR_RECORD_MODE environment variable to set the record
+    # mode. By default, this value is set to 'once'.
+    # See http://vcrpy.readthedocs.io/en/latest/usage.html#record-modes
+    # for more details about all the record modes.
+    vcr_record_mode = os.getenv('POSTORIUS_VCR_RECORD_MODE', 'once')
+    if vcr_record_mode not in ('once', 'all', 'none', 'new_episodes'):
+        vcr_log.warning('{} is not a valid VCR.py mode, '
+                        'using once as default'.format(vcr_record_mode))
+        vcr_record_mode = 'once'
+
     return vcr.VCR(
         filter_headers=['authorization', 'user-agent', 'date'],
         before_record=reorder_request_params,
@@ -141,8 +158,7 @@ def create_mock_member(properties=None):
     return mock_object
 
 
-class ViewTestCase(TestCase):
-
+class ViewTestCase(TransactionTestCase):
     use_vcr = True
     _fixtures_dir = os.path.join(os.path.abspath(
         os.path.dirname(__file__)), 'fixtures', 'vcr_cassettes')

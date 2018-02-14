@@ -20,15 +20,13 @@
 Authentication and authorization-related utilities.
 """
 
-from __future__ import absolute_import, unicode_literals
-
 from allauth.account.models import EmailAddress
 from django.utils import six
 from postorius.models import List
 
 
 def user_is_in_list_roster(user, mailing_list, roster):
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return False
     addresses = set(EmailAddress.objects.filter(
         user=user, verified=True).values_list("email", flat=True))

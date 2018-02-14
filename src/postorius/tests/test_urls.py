@@ -15,11 +15,13 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import, unicode_literals
 
 from django.test import TestCase
 
-from django.core.urlresolvers import reverse, NoReverseMatch
+try:
+    from django.core.urlresolvers import reverse, NoReverseMatch
+except ImportError:
+    from django.urls import reverse, NoReverseMatch
 
 
 class URLTest(TestCase):
@@ -40,4 +42,4 @@ class URLTest(TestCase):
 
     def test_held_message_url_ends_with_slash(self):
         url = reverse('rest_held_message', args=('foo', 0))
-        self.assertEquals(url[-2:], '0/')
+        self.assertEqual(url[-2:], '0/')

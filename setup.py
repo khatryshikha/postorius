@@ -47,8 +47,8 @@ setup(
     package_dir={'': 'src'},
     include_package_data=True,
     install_requires=[
-        'Django>=1.8,<1.12',
-        'django-mailman3',
+        'Django>=1.11,<1.12',
+        'django-mailman3>=1.2.0a1',
         'mailmanclient~=3.1.1a1'
     ],
     tests_require=[

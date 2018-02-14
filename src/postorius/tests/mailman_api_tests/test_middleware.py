@@ -43,10 +43,12 @@ class TestMiddleware(TestCase):
         mock_method.side_effect = MailmanApiError
         response = self.client.get(reverse('list_index'))
         # Check that correct error page is rendered.
-        self.assertTrue('Mailman REST API not available' in response.content)
+        self.assertEqual('Mailman REST API not available. Please start Mailman core.',    # noqa
+                         response.context['error'])
         mock_method.reset_mock()
         # Check similar semantics with MailmanConnectionError from
         # mailmanclient.
         mock_method.side_effect = MailmanConnectionError
         response = self.client.get(reverse('list_index'))
-        self.assertTrue('Mailman REST API not available' in response.content)
+        self.assertEqual('Mailman REST API not available. Please start Mailman core.',    # noqa
+                         response.context['error'])

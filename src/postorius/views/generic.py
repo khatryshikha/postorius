@@ -17,8 +17,6 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import absolute_import, unicode_literals
-
 from django.views.generic import TemplateView
 from django_mailman3.lib.mailman import get_mailman_client
 
