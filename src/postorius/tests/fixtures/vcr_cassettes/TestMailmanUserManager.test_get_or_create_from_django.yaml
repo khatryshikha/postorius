@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users/bob@example.com
+  response:
+    body: {string: 404 Not Found}
+    headers:
+      content-length: ['13']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 404, message: Not Found}
+- request:
+    body: email=bob%40example.com&password=None
+    headers:
+      accept-encoding: ['gzip, deflate']
+      content-type: [application/x-www-form-urlencoded]
+    method: POST
+    uri: http://localhost:9001/3.0/users
+  response:
+    body: {string: ''}
+    headers:
+      content-length: ['0']
+      content-type: [application/json; charset=UTF-8]
+      location: ['http://localhost:9001/3.0/users/9']
+    status: {code: 201, message: Created}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users/bob@example.com
+  response:
+    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"419f36720f2c1f609abb9dba86d672046e258746\"",
+        "is_server_owner": false, "password": "$6$rounds=656000$9RtMRSNXnyJrhFIY$m1h4IJZcVjV6vjHlEJZdRdbb1205I/BlyuS2NCj/l.8Y0wnSexVAkR53gKgUnZe/kfgU1Z6Mkkc0vy8tBtN6F1",
+        "self_link": "http://localhost:9001/3.0/users/9", "user_id": 9}'}
+    headers:
+      content-length: ['324']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/domains
+  response:
+    body: {string: '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
+        "start": 0, "total_size": 0}'}
+    headers:
+      content-length: ['90']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users
+  response:
+    body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "http_etag":
+        "\"419f36720f2c1f609abb9dba86d672046e258746\"", "is_server_owner": false,
+        "password": "$6$rounds=656000$9RtMRSNXnyJrhFIY$m1h4IJZcVjV6vjHlEJZdRdbb1205I/BlyuS2NCj/l.8Y0wnSexVAkR53gKgUnZe/kfgU1Z6Mkkc0vy8tBtN6F1",
+        "self_link": "http://localhost:9001/3.0/users/9", "user_id": 9}], "http_etag":
+        "\"0ef0452cdbbdec46cc29e45870f9be56ef57493f\"", "start": 0, "total_size":
+        1}'}
+    headers:
+      content-length: ['429']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: DELETE
+    uri: http://localhost:9001/3.0/users/9
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+    status: {code: 204, message: No Content}
+version: 1

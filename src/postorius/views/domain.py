@@ -17,8 +17,6 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import absolute_import, unicode_literals
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
@@ -82,15 +80,16 @@ def domain_edit(request, domain):
         domain_obj = Domain.objects.get(mail_host=domain)
     except Mailman404Error:
         raise Http404('Domain does not exist')
-    form_args = []
+    form_args = {}
     if request.method == 'POST':
-        form_args.append(request.POST)
+        form_args = request.POST
     form_initial = {
         'mail_host': domain,
         'description': domain_obj.description,
         'site': MailDomain.objects.get(mail_domain=domain).site,
         }
-    form = DomainForm(*form_args, initial=form_initial)
+    form = DomainForm(form_args, initial=form_initial)
+    # TODO: move this to Original Domain Form instead of here.
     form.fields["mail_host"].widget = HiddenInput()
 
     if request.method == 'POST':

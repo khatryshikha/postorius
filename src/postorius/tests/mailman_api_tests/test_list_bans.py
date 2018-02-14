@@ -17,12 +17,14 @@
 
 """Tests for ban lists"""
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from allauth.account.models import EmailAddress
 from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 
 from postorius.tests.utils import ViewTestCase
 

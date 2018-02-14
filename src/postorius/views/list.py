@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import, unicode_literals
 
 import csv
 import email.utils
@@ -27,7 +26,6 @@ from django.http import HttpResponse, HttpResponseNotAllowed, Http404
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.core.validators import validate_email
 from django.forms import formset_factory
 from django.shortcuts import render, redirect
@@ -49,6 +47,11 @@ from postorius.models import Domain, List, Mailman404Error
 from postorius.auth.decorators import (
     list_owner_required, list_moderator_required, superuser_required)
 from postorius.views.generic import MailingListView
+
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 
 
 logger = logging.getLogger(__name__)
@@ -155,7 +158,7 @@ def list_member_options(request, list_id, email):
                     messages.info(request,
                                   _("No change to the member's preferences."))
                     return redirect('list_member_options', list_id, email)
-                for key in preferences_form.fields.keys():
+                for key in list(preferences_form.fields.keys()):
                     member_prefs[key] = preferences_form.cleaned_data[key]
                 try:
                     member_prefs.save()
@@ -174,7 +177,7 @@ def list_member_options(request, list_id, email):
                     messages.info(request,
                                   _("No change to the member's moderation."))
                     return redirect('list_member_options', list_id, email)
-                for key in moderation_form.fields.keys():
+                for key in list(moderation_form.fields.keys()):
                     setattr(mm_member, key, moderation_form.cleaned_data[key])
                 try:
                     mm_member.save()
@@ -216,7 +219,7 @@ class ListSummaryView(MailingListView):
                 'hyperkitty' in self.mailing_list.archivers and
                 self.mailing_list.archivers['hyperkitty']):
             data['hyperkitty_enabled'] = True
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             user_emails = EmailAddress.objects.filter(
                 user=request.user, verified=True).order_by(
                 "email").values_list("email", flat=True)
@@ -576,6 +579,8 @@ def list_new(request, template='postorius/lists/new.html'):
 def list_index(request, template='postorius/index.html'):
     """Show a table of all public mailing lists.
     """
+    # TODO maxking: Figure out why does this view accept POST request and why
+    # can't it be just a GET with list parameter.
     if request.method == 'POST':
         return redirect("list_summary", list_id=request.POST["list"])
 
@@ -614,7 +619,7 @@ def list_delete(request, list_id):
 @login_required
 @list_moderator_required
 def list_subscription_requests(request, list_id):
-    """Shows a list of held messages.
+    """Shows a list of subscription requests.
     """
     m_list = List.objects.get_or_404(fqdn_listname=list_id)
     return render(request, 'postorius/lists/subscription_requests.html',
@@ -637,6 +642,7 @@ def handle_subscription_request(request, list_id, request_id, action):
         'discard': _('The request has been discarded.'),
         'defer': _('The request has been defered.'),
     }
+    assert action in confirmation_messages
     try:
         m_list = List.objects.get_or_404(fqdn_listname=list_id)
         # Moderate request and add feedback message to session.
@@ -699,7 +705,7 @@ def list_settings(request, list_id=None, visible_section=None,
     m_list = List.objects.get_or_404(fqdn_listname=list_id)
     list_settings = m_list.settings
     initial_data = dict(
-        (key, unicode(value)) for key, value in list_settings.items())
+        (key, str(value)) for key, value in list(list_settings.items()))
     # List settings are grouped an processed in different forms.
     if request.method == 'POST':
         form = form_class(request.POST, mlist=m_list, initial=initial_data)
@@ -783,6 +789,10 @@ def remove_all_subscribers(request, list_id):
         return redirect('mass_removal', mlist.list_id)
     if request.method == 'POST':
         try:
+            # TODO maxking: This doesn't scale. Either the Core should provide
+            # an endpoint to remove all subscribers or there should be some
+            # better way to do this. Maybe, Core can take a list of email
+            # addresses in batches of 50 and unsubscribe all of them.
             for names in mlist.members:
                 mlist.unsubscribe(names.email)
             messages.success(request, _('All members have been'

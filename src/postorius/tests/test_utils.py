@@ -32,4 +32,5 @@ class TestUtils(TestCase):
     def test_render_api_error_works(self):
         request = self.factory.get('/postorius/lists')
         response = render_api_error(request)
-        self.assertTrue('Mailman REST API not available.' in response.content)
+        self.assertTrue('Mailman REST API not available.' in
+                        str(response.content))

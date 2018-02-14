@@ -18,6 +18,11 @@ You should have received a copy of the GNU Lesser General Public License
 along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 
 
+1.2
+===
+(XXXX-XX-XX)
+* Postorius now runs only on Python 3.4+ and supports Django 1.8 and 1.11+
+
 1.1.2
 =====
 (2017-12-27)
@@ -28,7 +33,7 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 * Postorius now sets the 'Display Name' of the user in Core correctly. This
   fixes a security vulnerability where user's display_name would be set as their
   Core's password.
-
+=======
 
 1.1.1
 =====

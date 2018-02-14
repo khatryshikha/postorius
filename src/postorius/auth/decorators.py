@@ -18,8 +18,6 @@
 
 """Postorius view decorators."""
 
-from __future__ import absolute_import, unicode_literals
-
 from django.core.exceptions import PermissionDenied
 
 from postorius.auth.utils import set_user_access_props
@@ -33,7 +31,7 @@ def list_owner_required(fn):
     def wrapper(*args, **kwargs):
         user = args[0].user
         list_id = kwargs['list_id']
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             raise PermissionDenied
         if user.is_superuser:
             return fn(*args, **kwargs)
@@ -53,7 +51,7 @@ def list_moderator_required(fn):
     def wrapper(*args, **kwargs):
         user = args[0].user
         list_id = kwargs['list_id']
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             raise PermissionDenied
         if user.is_superuser:
             return fn(*args, **kwargs)

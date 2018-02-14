@@ -1,19 +1,25 @@
 image: maxking/mailman-ci-runner
 
-django-1.8:
-  stage: test
-  script:
-  - tox -e py27-django18
 
-django-1.10:
+py35-django-1.11:
   stage: test
   script:
-  - tox -e py27-django110
+  - tox -e py35-django111
 
-django-1.11:
+py36-django-1.11:
   stage: test
   script:
-  - tox -e py27-django111
+  - tox -e py36-django111
+
+py36-django-20:
+  stage: test
+  script:
+    - tox -e py36-django20
+
+py35-django-20:
+  stage: test
+  script:
+    - tox -e py35-django20    
 
 coverage:
   stage: test
@@ -32,14 +38,13 @@ pep8:
 django-1.11-git:
   stage: test
   script:
-  - tox -e py27-django111-head
-  allow_failure: true
+  - tox -e py36-django-latest-head
 
-#django-latest:
-#  stage: test
-#  script:
-#  - tox -e py27-django-latest
-#  allow_failure: true
+django-latest:
+  stage: test
+  allow_failure: true
+  script:
+    - tox -e py36-django-latest
 
 pages:
   stage: deploy

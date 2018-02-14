@@ -1,0 +1,87 @@
+interactions:
+- request:
+    body: email=bob%40example.com&password=Bob
+    headers:
+      accept-encoding: ['gzip, deflate']
+      content-type: [application/x-www-form-urlencoded]
+    method: POST
+    uri: http://localhost:9001/3.0/users
+  response:
+    body: {string: ''}
+    headers:
+      content-length: ['0']
+      content-type: [application/json; charset=UTF-8]
+      location: ['http://localhost:9001/3.0/users/5']
+    status: {code: 201, message: Created}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users/5
+  response:
+    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"66bbf9db35f9f70b8bd9985e7e8ca2caa2938ca9\"",
+        "is_server_owner": false, "password": "$6$rounds=656000$fgvBTCMGVRtX89jy$9xaXSXpqzh4ftxoGAKAe42bLoHrE2nc6aUmS9OE3kaKsH6SjdnnZIz3QjeADIEW8RQP2hjfRPTgai3KOfHoTy1",
+        "self_link": "http://localhost:9001/3.0/users/5", "user_id": 5}'}
+    headers:
+      content-length: ['324']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users/5/addresses
+  response:
+    body: {string: '{"entries": [{"email": "bob@example.com", "http_etag": "\"952bb105e388f606ddccf617ac9db88022025446\"",
+        "original_email": "bob@example.com", "registered_on": "2005-08-01T07:49:23",
+        "self_link": "http://localhost:9001/3.0/addresses/bob@example.com", "user":
+        "http://localhost:9001/3.0/users/5"}], "http_etag": "\"fab5d2e85ef7504de5c1e30e52dbf1741ff5a5d0\"",
+        "start": 0, "total_size": 1}'}
+    headers:
+      content-length: ['384']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/domains
+  response:
+    body: {string: '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
+        "start": 0, "total_size": 0}'}
+    headers:
+      content-length: ['90']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: GET
+    uri: http://localhost:9001/3.0/users
+  response:
+    body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "http_etag":
+        "\"66bbf9db35f9f70b8bd9985e7e8ca2caa2938ca9\"", "is_server_owner": false,
+        "password": "$6$rounds=656000$fgvBTCMGVRtX89jy$9xaXSXpqzh4ftxoGAKAe42bLoHrE2nc6aUmS9OE3kaKsH6SjdnnZIz3QjeADIEW8RQP2hjfRPTgai3KOfHoTy1",
+        "self_link": "http://localhost:9001/3.0/users/5", "user_id": 5}], "http_etag":
+        "\"44fcc34ec19ba43c19ac735e7947e31a8b42a5cf\"", "start": 0, "total_size":
+        1}'}
+    headers:
+      content-length: ['429']
+      content-type: [application/json; charset=UTF-8]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      accept-encoding: ['gzip, deflate']
+    method: DELETE
+    uri: http://localhost:9001/3.0/users/5
+  response:
+    body: {string: ''}
+    headers:
+      Content-Length: ['0']
+    status: {code: 204, message: No Content}
+version: 1

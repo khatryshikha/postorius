@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import, unicode_literals
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import AnonymousUser, User

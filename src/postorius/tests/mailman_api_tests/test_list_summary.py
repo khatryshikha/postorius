@@ -15,11 +15,13 @@
 # You should have received a copy of the GNU General Public License along with
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import, print_function, unicode_literals
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 
 from postorius.tests.utils import ViewTestCase
 from postorius.forms import ListAnonymousSubscribe
@@ -72,9 +74,9 @@ class ListSummaryPageTest(ViewTestCase):
         response = self.client.get(reverse('list_summary',
                                            args=('foo@example.com', )))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('You have a subscription request pending. '
-                        'If you don\'t hear back soon, '
-                        'please contact the list owners.' in response.content)
+        self.assertContains(response, 'You have a subscription request '
+                                      'pending. If you don\'t hear back soon, '
+                                      'please contact the list owners.')
         self.assertNotContains(response, 'Unsubscribe')
         self.assertNotContains(response, 'Subscribe')
 
@@ -87,7 +89,7 @@ class ListSummaryPageTest(ViewTestCase):
         response = self.client.get(reverse('list_summary',
                                            args=('foo@example.com', )))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Unsubscribe' in response.content)
+        self.assertContains(response, 'Unsubscribe')
 
     def test_list_summary_owner(self):
         # Response must contain the administration menu
