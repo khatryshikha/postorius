@@ -57,6 +57,7 @@ def domain_new(request):
         if form.is_valid():
             domain = Domain(mail_host=form.cleaned_data['mail_host'],
                             description=form.cleaned_data['description'],
+                            alias_domain=form.cleaned_data['alias_domain'],
                             owner=request.user.email)
             try:
                 domain.save()
@@ -86,6 +87,7 @@ def domain_edit(request, domain):
     form_initial = {
         'mail_host': domain,
         'description': domain_obj.description,
+        'alias_domain': domain_obj.alias_domain,
         'site': MailDomain.objects.get(mail_domain=domain).site,
         }
     form = DomainForm(form_args, initial=form_initial)
@@ -95,6 +97,7 @@ def domain_edit(request, domain):
     if request.method == 'POST':
         if form.is_valid():
             domain_obj.description = form.cleaned_data['description']
+            domain_obj.alias_domain = form.cleaned_data['alias_domain']
             try:
                 web_host = MailDomain.objects.get(mail_domain=domain)
             except MailDomain.DoesNotExist:

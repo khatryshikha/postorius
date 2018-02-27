@@ -16,8 +16,6 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import unittest
-
 from mock import patch, MagicMock
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
@@ -122,8 +120,6 @@ class TestMailmanUserManager(ViewTestCase):
         self.assertIsNotNone(mm_user)
         self.assertEqual(len(mm_user.addresses), 1)
 
-    # TODO maxking: Find out the reason for this failure.
-    @unittest.expectedFailure
     def test_create_from_django_sets_all_attributes(self):
         mm_user = self.user_manager.create_from_django(self.bob)
         self.assertIsNotNone(mm_user)

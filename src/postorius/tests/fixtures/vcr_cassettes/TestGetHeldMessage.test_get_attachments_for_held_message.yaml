@@ -20,10 +20,10 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: '{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"492652d581dc93af101db450d81ae93a074bff49\"",
         "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['172']
+      content-length: ['194']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -47,47 +47,55 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/queues
   response:
-    body: {string: '{"entries": [{"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/archive",
-        "files": [], "http_etag": "\"c86609dd05b85d034b0528ca55ffaafe4eed239f\"",
+    body: {string: '{"entries": [{"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/archive",
+        "files": [], "http_etag": "\"a965a7de35fe81af233bc9a62391fbe2657e7f42\"",
         "name": "archive", "self_link": "http://localhost:9001/3.0/queues/archive"},
-        {"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/bad",
-        "files": [], "http_etag": "\"1634a3abecf49cd62e21bff3a1c8144e6529d91b\"",
-        "name": "bad", "self_link": "http://localhost:9001/3.0/queues/bad"}, {"count":
-        0, "directory": "/home/maxking/Documents/mm3/core/var/queue/bounces", "files":
-        [], "http_etag": "\"77512be67765d90c5231c0320f12fb6d65a248fe\"", "name": "bounces",
-        "self_link": "http://localhost:9001/3.0/queues/bounces"}, {"count": 0, "directory":
-        "/home/maxking/Documents/mm3/core/var/queue/command", "files": [], "http_etag":
-        "\"e577140fb7eedb0558326b04f22d290d4ba8d710\"", "name": "command", "self_link":
-        "http://localhost:9001/3.0/queues/command"}, {"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/digest",
-        "files": [], "http_etag": "\"71f35a9359f385eea04630156dacec273cd157b5\"",
+        {"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/bad", "files":
+        [], "http_etag": "\"5c7a868edf835f603d5ea2282c54d3e9a6c164e3\"", "name": "bad",
+        "self_link": "http://localhost:9001/3.0/queues/bad"}, {"count": 0, "directory":
+        "/var/MM/3/alias_domains/var/queue/bounces", "files": [], "http_etag": "\"0efa158ae94c936ab05ebfffaf11411a4bc56e34\"",
+        "name": "bounces", "self_link": "http://localhost:9001/3.0/queues/bounces"},
+        {"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/command", "files":
+        [], "http_etag": "\"3dfe167968475c44ed78a3f31ccb9b3c15ab85a4\"", "name": "command",
+        "self_link": "http://localhost:9001/3.0/queues/command"}, {"count": 0, "directory":
+        "/var/MM/3/alias_domains/var/queue/digest", "files": [], "http_etag": "\"05900dbeb0d2c6afb1c4f647feb1032eeeb9a6f1\"",
         "name": "digest", "self_link": "http://localhost:9001/3.0/queues/digest"},
-        {"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/in",
-        "files": [], "http_etag": "\"4da83977cc2bf1b30177543a513d2437a2661daf\"",
-        "name": "in", "self_link": "http://localhost:9001/3.0/queues/in"}, {"count":
-        0, "directory": "/home/maxking/Documents/mm3/core/var/queue/nntp", "files":
-        [], "http_etag": "\"28c53fd6d520a2ea3455c5db7825c8b315e0bfad\"", "name": "nntp",
-        "self_link": "http://localhost:9001/3.0/queues/nntp"}, {"count": 0, "directory":
-        "/home/maxking/Documents/mm3/core/var/queue/out", "files": [], "http_etag":
-        "\"4493ef374cc5506aec20821a9c06fc28ddb52164\"", "name": "out", "self_link":
-        "http://localhost:9001/3.0/queues/out"}, {"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/pipeline",
-        "files": [], "http_etag": "\"27589f6dd86e14c06156c937d4278daaa7166305\"",
+        {"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/in", "files":
+        [], "http_etag": "\"4957a24b7c2e3aecdda24550272beb0c4dc053f0\"", "name": "in",
+        "self_link": "http://localhost:9001/3.0/queues/in"}, {"count": 0, "directory":
+        "/var/MM/3/alias_domains/var/queue/nntp", "files": [], "http_etag": "\"a70a565449ec048bb746c033032375af156664c6\"",
+        "name": "nntp", "self_link": "http://localhost:9001/3.0/queues/nntp"}, {"count":
+        0, "directory": "/var/MM/3/alias_domains/var/queue/out", "files": [], "http_etag":
+        "\"8900c35788c935b9ef9d6c61a688773d1302727f\"", "name": "out", "self_link":
+        "http://localhost:9001/3.0/queues/out"}, {"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/pipeline",
+        "files": [], "http_etag": "\"83394a8c007c6414986680d707ecb98b42002d52\"",
         "name": "pipeline", "self_link": "http://localhost:9001/3.0/queues/pipeline"},
-        {"count": 4, "directory": "/home/maxking/Documents/mm3/core/var/queue/retry",
-        "files": ["1514416766.4104834+3330672ab1a611b616215eb2240533df25f68136", "1514416893.7102191+7425c721d1edda82b7f27be4e79205f76deafe47",
-        "1514417135.1058683+dcaf9fc9402d409b01a4542af914aef03e66f21e", "1514417187.3026206+5d8405d29f29590195b9a3511cb0534ce54709f5"],
-        "http_etag": "\"5639b6aa1fd7a530ff0278dfc930a14ed3db566e\"", "name": "retry",
-        "self_link": "http://localhost:9001/3.0/queues/retry"}, {"count": 4, "directory":
-        "/home/maxking/Documents/mm3/core/var/queue/shunt", "files": ["1514415686.7615054+eb6449fb0d1767490b30b8ff38a51836ed6f79b0",
-        "1514416450.45386+43c5ab9d88ed8b193520ab924aeb392d84bee42a", "1514416518.958421+74e22ec71f5b38f3212d0dda60d369f09c060fb9",
-        "1514416722.2320535+43de5e27d78de5bc0da8713900829045f54dc667"], "http_etag":
-        "\"35ebfa342fbf87098ea1ed8402d4629cd8235bc5\"", "name": "shunt", "self_link":
-        "http://localhost:9001/3.0/queues/shunt"}, {"count": 0, "directory": "/home/maxking/Documents/mm3/core/var/queue/virgin",
-        "files": [], "http_etag": "\"8a84e3c7199481bc9211b18c79e8a3f8008837a6\"",
+        {"count": 12, "directory": "/var/MM/3/alias_domains/var/queue/retry", "files":
+        ["1519688271.7519717+08ed582e52e8237f4d2da9a8d83f7ea92c2293bd", "1519688272.8110895+8fbecc66ade9f992f9e1e75889abcdf165e692aa",
+        "1519688296.1748803+3bb8a99a446a1ae2189ebdd4b8ee2189e698541c", "1519688296.4772317+2f3588b2db13def1372166b77cbfdf057abf1d8a",
+        "1519688296.5467513+2688bfdc26c9b2f073b07ccb09435ee843872018", "1519688296.6050532+ff5b0c76afb8340a8eb1f0c7bc4da025b094292b",
+        "1519688296.6533544+3bbe9f78ad55bf335ffaa8609fa7ee39d72e8333", "1519688296.706324+23527e94830cba7bb8a3aed6435e020fe9a16c3a",
+        "1519688296.7621577+eddde0da51c1ece02266aab446d08c7ee6029e8f", "1519688296.8151875+6f8ee3b8d3de21120fc375de502a79db1cf9d401",
+        "1519688296.8634899+5e6151580b019b94897940bc02d4196629eadf4d", "1519688296.9041495+62dfd16262fb329b85eefb7a641911ac14d72d71"],
+        "http_etag": "\"4124343cd15e0e741e5ae3e26c107fca827ebccc\"", "name": "retry",
+        "self_link": "http://localhost:9001/3.0/queues/retry"}, {"count": 16, "directory":
+        "/var/MM/3/alias_domains/var/queue/shunt", "files": ["1519688248.9371+89440c2ed819ea83186787a91ed8bd3586a310a9",
+        "1519688251.0100446+7772e33f015fd40162121be73b98b8d6578e2dc1", "1519688253.0597887+55b491c04486550c941aaa9ed4b51bbf14d81ed0",
+        "1519688255.2051923+ac6d15eed1ed28393d1f1780635afe8c13766241", "1519688256.617356+27dba1ea453027c14c2009162200183f657718bc",
+        "1519688258.4091516+44875ec72dd06ac836704becb27163fb8306e57e", "1519688260.5095391+6581faf21147f52d052d4fc45b5e2e21e8f1d113",
+        "1519688273.8255494+7571362c920ab1117237c6aabd476525c9320746", "1519688273.9572625+472380abf2eb7ba26c8dfac8abaea549ad3d4a7b",
+        "1519688281.902796+a47ff8d0e26f83b55d15065e349392faafe54c80", "1519688283.024055+8c6178ebf541d96d7286c2032e30948ec92095d6",
+        "1519688285.2254813+a0a7a9e2578e2fff41760f76c6b4ed897e4337d2", "1519688285.2731194+bc702f340591cc1b1559e72c7eb52cfaa26a5da1",
+        "1519688285.3957512+59dca1d4d8aae66cd0d5a3a19265bb013ae1703a", "1519688310.9556012+bb05f3a1d904bdcd9860a5889bee4873da53ab87",
+        "1519688311.8146396+d7cd71eeb5f0306e040b171746033fd0cb45a109"], "http_etag":
+        "\"cc35e75ea08d3878be97448c04a55c64dd097060\"", "name": "shunt", "self_link":
+        "http://localhost:9001/3.0/queues/shunt"}, {"count": 0, "directory": "/var/MM/3/alias_domains/var/queue/virgin",
+        "files": [], "http_etag": "\"96378341ee4cc955af65d022dcaa0b6f671e60cb\"",
         "name": "virgin", "self_link": "http://localhost:9001/3.0/queues/virgin"}],
-        "http_etag": "\"a8bd96ec18f997d00e847c1aa134f016ed0442fc\"", "self_link":
+        "http_etag": "\"92fa6af48666b3173df29ef454a52c4d25cbfd85\"", "self_link":
         "http://localhost:9001/3.0/queues", "start": 0, "total_size": 12}'}
     headers:
-      content-length: ['3359']
+      content-length: ['4509']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -102,7 +110,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/queues/in/1514417229.0329216+1d5a702c420f68ce83304d210402d27234a6f652']
+      location: ['http://localhost:9001/3.0/queues/in/1519688317.9872897+2e40a8d7c99caf6751fda4d0312ec1b99e43de02']
     status: {code: 201, message: Created}
 - request:
     body: null
@@ -293,12 +301,13 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: '{"entries": [{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
-        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}],
-        "http_etag": "\"2ec9679269ad1f741705a62db0162f5585ae5c3c\"", "start": 0, "total_size":
+    body: {string: '{"entries": [{"alias_domain": null, "description": null, "http_etag":
+        "\"492652d581dc93af101db450d81ae93a074bff49\"", "mail_host": "example.com",
+        "self_link": "http://localhost:9001/3.0/domains/example.com"}], "http_etag":
+        "\"5868fb6d2442c0d163e0edb2bfd7a92b6c812796\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['277']
+      content-length: ['299']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:

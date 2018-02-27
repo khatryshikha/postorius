@@ -20,10 +20,10 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: '{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"492652d581dc93af101db450d81ae93a074bff49\"",
         "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['172']
+      content-length: ['194']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -33,14 +33,14 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: '{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"492652d581dc93af101db450d81ae93a074bff49\"",
         "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['172']
+      content-length: ['194']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
-    body: description=
+    body: description=&alias_domain=
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -58,10 +58,10 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: '{"description": "", "http_etag": "\"05bbbdfd3e0b262faa5b23b1fce9ba2528857403\"",
+    body: {string: '{"alias_domain": "", "description": "", "http_etag": "\"7a40fe2b87468eabed95ccd670e61849a997b8c1\"",
         "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['170']
+      content-length: ['190']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -71,12 +71,13 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: '{"entries": [{"description": "", "http_etag": "\"05bbbdfd3e0b262faa5b23b1fce9ba2528857403\"",
-        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}],
-        "http_etag": "\"367351bf3a2c687a3d63d1ff3fb7a91d87a5a756\"", "start": 0, "total_size":
+    body: {string: '{"entries": [{"alias_domain": "", "description": "", "http_etag":
+        "\"7a40fe2b87468eabed95ccd670e61849a997b8c1\"", "mail_host": "example.com",
+        "self_link": "http://localhost:9001/3.0/domains/example.com"}], "http_etag":
+        "\"d014e3e9816238e80944c6f56c573b5397bb3ef7\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['275']
+      content-length: ['295']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
