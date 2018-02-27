@@ -52,6 +52,11 @@ class DomainForm(forms.Form):
     description = forms.CharField(
         label=_('Description'),
         required=False)
+    alias_domain = forms.CharField(
+        label=_('Alias Domain'),
+        required=False,
+        help_text=_('Normally empty.  Used only for unusual Postfix configs.'),
+        )
     site = SiteModelChoiceField(
         label=_('Web Host'),
         error_messages={'required': _('Please enter a domain name'),

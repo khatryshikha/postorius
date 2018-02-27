@@ -34,10 +34,10 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: '{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"492652d581dc93af101db450d81ae93a074bff49\"",
         "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['172']
+      content-length: ['194']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -75,10 +75,10 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains/most-desirable.org
   response:
-    body: {string: '{"description": null, "http_etag": "\"dc1c685b6a13c4b62e31720721a37aee0ea71b92\"",
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"2d29a642c90a16faf58ac619848efdb348e6dbe0\"",
         "mail_host": "most-desirable.org", "self_link": "http://localhost:9001/3.0/domains/most-desirable.org"}'}
     headers:
-      content-length: ['186']
+      content-length: ['208']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -126,14 +126,15 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: '{"entries": [{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
-        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"},
-        {"description": null, "http_etag": "\"dc1c685b6a13c4b62e31720721a37aee0ea71b92\"",
+    body: {string: '{"entries": [{"alias_domain": null, "description": null, "http_etag":
+        "\"492652d581dc93af101db450d81ae93a074bff49\"", "mail_host": "example.com",
+        "self_link": "http://localhost:9001/3.0/domains/example.com"}, {"alias_domain":
+        null, "description": null, "http_etag": "\"2d29a642c90a16faf58ac619848efdb348e6dbe0\"",
         "mail_host": "most-desirable.org", "self_link": "http://localhost:9001/3.0/domains/most-desirable.org"}],
-        "http_etag": "\"573e3526107669c1ddbcf4449b26303b58abddd0\"", "start": 0, "total_size":
+        "http_etag": "\"34c6609d7c461a9dd044986927bb1ff9d2cacb62\"", "start": 0, "total_size":
         2}'}
     headers:
-      content-length: ['465']
+      content-length: ['509']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:

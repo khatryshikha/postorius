@@ -23,7 +23,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/users/9']
+      location: ['http://localhost:9001/3.0/users/158']
     status: {code: 201, message: Created}
 - request:
     body: null
@@ -32,11 +32,11 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/users/bob@example.com
   response:
-    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"419f36720f2c1f609abb9dba86d672046e258746\"",
-        "is_server_owner": false, "password": "$6$rounds=656000$9RtMRSNXnyJrhFIY$m1h4IJZcVjV6vjHlEJZdRdbb1205I/BlyuS2NCj/l.8Y0wnSexVAkR53gKgUnZe/kfgU1Z6Mkkc0vy8tBtN6F1",
-        "self_link": "http://localhost:9001/3.0/users/9", "user_id": 9}'}
+    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"c53ff88596f2b14f4c24b53934ccec6b9e3aa58f\"",
+        "is_server_owner": false, "password": "$6$rounds=656000$U8.JyZQuX3dSumc/$oge/LhlknMBbJ4aF.J.yClWbc62MkMXmQmkTPGDcChgAmN7ircnGHBzkxRwazHo7MmCnrrQWZZnyxCkyhwS3q1",
+        "self_link": "http://localhost:9001/3.0/users/158", "user_id": 158}'}
     headers:
-      content-length: ['324']
+      content-length: ['328']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -60,13 +60,13 @@ interactions:
     uri: http://localhost:9001/3.0/users
   response:
     body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "http_etag":
-        "\"419f36720f2c1f609abb9dba86d672046e258746\"", "is_server_owner": false,
-        "password": "$6$rounds=656000$9RtMRSNXnyJrhFIY$m1h4IJZcVjV6vjHlEJZdRdbb1205I/BlyuS2NCj/l.8Y0wnSexVAkR53gKgUnZe/kfgU1Z6Mkkc0vy8tBtN6F1",
-        "self_link": "http://localhost:9001/3.0/users/9", "user_id": 9}], "http_etag":
-        "\"0ef0452cdbbdec46cc29e45870f9be56ef57493f\"", "start": 0, "total_size":
+        "\"c53ff88596f2b14f4c24b53934ccec6b9e3aa58f\"", "is_server_owner": false,
+        "password": "$6$rounds=656000$U8.JyZQuX3dSumc/$oge/LhlknMBbJ4aF.J.yClWbc62MkMXmQmkTPGDcChgAmN7ircnGHBzkxRwazHo7MmCnrrQWZZnyxCkyhwS3q1",
+        "self_link": "http://localhost:9001/3.0/users/158", "user_id": 158}], "http_etag":
+        "\"14c0c7f647847acf300fa67e4cde88b032a56cde\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['429']
+      content-length: ['433']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -74,7 +74,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/9
+    uri: http://localhost:9001/3.0/users/158
   response:
     body: {string: ''}
     headers:

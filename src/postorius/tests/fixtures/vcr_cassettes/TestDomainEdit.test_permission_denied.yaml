@@ -20,12 +20,13 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: '{"entries": [{"description": null, "http_etag": "\"d150abd34fabbcef42a2c654bfac81aa04ea4d6f\"",
-        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}],
-        "http_etag": "\"2ec9679269ad1f741705a62db0162f5585ae5c3c\"", "start": 0, "total_size":
+    body: {string: '{"entries": [{"alias_domain": null, "description": null, "http_etag":
+        "\"492652d581dc93af101db450d81ae93a074bff49\"", "mail_host": "example.com",
+        "self_link": "http://localhost:9001/3.0/domains/example.com"}], "http_etag":
+        "\"5868fb6d2442c0d163e0edb2bfd7a92b6c812796\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['277']
+      content-length: ['299']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
