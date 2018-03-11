@@ -81,16 +81,18 @@ def domain_edit(request, domain):
         domain_obj = Domain.objects.get(mail_host=domain)
     except Mailman404Error:
         raise Http404('Domain does not exist')
-    form_args = {}
     if request.method == 'POST':
         form_args = request.POST
-    form_initial = {
-        'mail_host': domain,
-        'description': domain_obj.description,
-        'alias_domain': domain_obj.alias_domain,
-        'site': MailDomain.objects.get(mail_domain=domain).site,
+        form = DomainForm(form_args)
+    elif request.method == 'GET':
+        form_initial = {
+            'mail_host': domain,
+            'description': domain_obj.description,
+            'alias_domain': domain_obj.alias_domain,
+            'site': MailDomain.objects.get(mail_domain=domain).site,
         }
-    form = DomainForm(form_args, initial=form_initial)
+        form = DomainForm(initial=form_initial)
+
     # TODO: move this to Original Domain Form instead of here.
     form.fields["mail_host"].widget = HiddenInput()
 
