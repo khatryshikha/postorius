@@ -54,6 +54,8 @@ class DomainForm(forms.Form):
         required=False)
     alias_domain = forms.CharField(
         label=_('Alias Domain'),
+        error_messages={
+            'invalid': _('Please enter a valid domain name or nothing.')},
         required=False,
         help_text=_('Normally empty.  Used only for unusual Postfix configs.'),
         )
@@ -74,3 +76,13 @@ class DomainForm(forms.Form):
         except ValidationError:
             raise forms.ValidationError(_("Please enter a valid domain name"))
         return mail_host
+
+    def clean_alias_domain(self):
+        alias_domain = self.cleaned_data['alias_domain']
+        if alias_domain != '':
+            try:
+                validate_email('mail@' + alias_domain)
+            except ValidationError:
+                raise forms.ValidationError(
+                    _("Please enter a valid domain name or nothing."))
+        return alias_domain

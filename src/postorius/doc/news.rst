@@ -22,6 +22,7 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 ===
 (XXXX-XX-XX)
 * Postorius now runs only on Python 3.4+ and supports Django 1.8 and 1.11+
+* Added the ability to set and edit ``alias_domain`` to the ``domains`` forms.
 
 1.1.2
 =====
