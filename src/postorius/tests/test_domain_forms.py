@@ -29,6 +29,7 @@ class TestDomainForm(TestCase):
         form = DomainForm()
         self.assertTrue(form.fields['mail_host'].label == 'Mail Host')
         self.assertTrue(form.fields['description'].label == 'Description')
+        self.assertTrue(form.fields['alias_domain'].label == 'Alias Domain')
         self.assertTrue(form.fields['site'].label == 'Web Host')
 
     def test_error_messages(self):
@@ -49,6 +50,14 @@ class TestDomainForm(TestCase):
         form = DomainForm({
             'mail_host': 'mailman.most-desirable.org',
             'description': 'The Most Desirable organization',
+            'site': 1,
+        })
+        self.assertTrue(form.is_valid())
+        # With a valid alias_domain the form should be valid.
+        form = DomainForm({
+            'mail_host': 'mailman.most-desirable.org',
+            'description': 'The Most Desirable organization',
+            'alias_domain': 'x.most-desirable.org',
             'site': 1,
         })
         self.assertTrue(form.is_valid())
@@ -74,6 +83,17 @@ class TestDomainForm(TestCase):
         self.assertTrue('mail_host' in form.errors.keys())
         self.assertEqual(form.errors['mail_host'][0],
                          'Please enter a valid domain name')
+        # Now we use an invalid value for alias domain.
+        form = DomainForm({
+            'mail_host': 'mailman.most-desirable.org',
+            'description': 'The Most Desirable organization',
+            'alias_domain': 'x@most-desirable.org',
+            'site': 1,
+        })
+        self.assertFalse(form.is_valid())
+        self.assertTrue('alias_domain' in form.errors.keys())
+        self.assertEqual(form.errors['alias_domain'][0],
+                         'Please enter a valid domain name or nothing.')
 
     def test_site_field_values(self):
         form = DomainForm()
