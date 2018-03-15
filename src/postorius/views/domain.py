@@ -20,7 +20,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
-from django.forms.widgets import HiddenInput
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext as _
@@ -28,7 +27,7 @@ from django_mailman3.models import MailDomain
 from django.utils.six.moves.urllib.error import HTTPError
 from postorius.auth.decorators import superuser_required
 from postorius.models import Domain, Mailman404Error
-from postorius.forms import DomainForm
+from postorius.forms import DomainEditForm, DomainForm
 
 
 @login_required
@@ -82,21 +81,7 @@ def domain_edit(request, domain):
     except Mailman404Error:
         raise Http404('Domain does not exist')
     if request.method == 'POST':
-        form_args = request.POST
-        form = DomainForm(form_args)
-    elif request.method == 'GET':
-        form_initial = {
-            'mail_host': domain,
-            'description': domain_obj.description,
-            'alias_domain': domain_obj.alias_domain,
-            'site': MailDomain.objects.get(mail_domain=domain).site,
-        }
-        form = DomainForm(initial=form_initial)
-
-    # TODO: move this to Original Domain Form instead of here.
-    form.fields["mail_host"].widget = HiddenInput()
-
-    if request.method == 'POST':
+        form = DomainEditForm(request.POST)
         if form.is_valid():
             domain_obj.description = form.cleaned_data['description']
             domain_obj.alias_domain = form.cleaned_data['alias_domain']
@@ -117,6 +102,14 @@ def domain_edit(request, domain):
             return redirect("domain_edit", domain=domain)
         else:
             messages.error(request, _('Please check the errors below'))
+    else:
+        form_initial = {
+            'description': domain_obj.description,
+            'alias_domain': domain_obj.alias_domain,
+            'site': MailDomain.objects.get(mail_domain=domain).site,
+        }
+        form = DomainEditForm(initial=form_initial)
+
     return render(request, 'postorius/domain/edit.html', {
                   'domain': domain, 'form': form})
 
