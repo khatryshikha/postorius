@@ -40,7 +40,7 @@ def _get_web_host_help():
 
 class DomainForm(forms.Form):
     """
-    Add or edit a domain.
+    Form to add a domain.
     """
     mail_host = forms.CharField(
         label=_('Mail Host'),
@@ -86,3 +86,11 @@ class DomainForm(forms.Form):
                 raise forms.ValidationError(
                     _("Please enter a valid domain name or nothing."))
         return alias_domain
+
+
+class DomainEditForm(DomainForm):
+    """
+    Form to edit domains
+    separte from the DomainForm, so that the mail_host can't be changed.
+    """
+    mail_host = None

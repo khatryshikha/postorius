@@ -20,10 +20,25 @@
 from django.test import TestCase
 from django.contrib.sites.models import Site
 
-from postorius.forms import DomainForm
+from postorius.forms import DomainEditForm, DomainForm
+
+
+class TestDomainEditForm(TestCase):
+    def test_form_does_not_contain_mail_host(self):
+        form = DomainEditForm()
+        self.assertTrue('description' in form.fields)
+        self.assertTrue('alias_domain' in form.fields)
+        self.assertTrue('site' in form.fields)
+        self.assertFalse('mail_host' in form.fields)
 
 
 class TestDomainForm(TestCase):
+    def test_form_contains_mail_host(self):
+        form = DomainForm()
+        self.assertTrue('description' in form.fields)
+        self.assertTrue('alias_domain' in form.fields)
+        self.assertTrue('site' in form.fields)
+        self.assertTrue('mail_host' in form.fields)
 
     def test_form_labels(self):
         form = DomainForm()
