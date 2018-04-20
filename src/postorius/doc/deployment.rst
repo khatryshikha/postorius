@@ -2,6 +2,8 @@
 Deployment
 ============
 
+Postorius support Python 3.5+ and Django 1.11+.
+
 .. note::
     This guide covers deployment options of Postorius.
 

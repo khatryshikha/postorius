@@ -41,7 +41,11 @@ setup(
     keywords='email mailman django',
     url=" https://gitlab.com/mailman/postorius",
     classifiers=[
-        "Programming Language :: Python",
+        "Framework :: Django",
+        "Development Status :: 4 - Beta",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Topic :: Communications :: Email :: Mailing List Servers",
+        "Programming Language :: Python :: 3",
     ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
