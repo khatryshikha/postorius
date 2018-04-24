@@ -29,8 +29,8 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 (2017-12-27)
 
 * Added a new ``reset_passwords`` command that resets _all_ user's passwords
-  inside of Core. This password is different from the one Postorius maintains
-  and is used for logging users in.
+  inside of Core. This password is different from the one Postorius
+  maintains. The Postorius password is the one used for logging users in.
 * Postorius now sets the 'Display Name' of the user in Core correctly. This
   fixes a security vulnerability where user's display_name would be set as their
   Core's password.
