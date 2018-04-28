@@ -113,31 +113,42 @@ class TestChangeSubscription(TestCase):
 class TestListNew(TestCase):
 
     def test_form_fields_list(self):
-        form = ListNew([
-            ("mailman.most-desirable.org", "mailman.most-desirable.org")],
-            {'listname': 'xyz',
-             'mail_host': 'mailman.most-desirable.org',
-             'list_owner': 'contact@mailman.most-desirable.org',
-             'advertised': 'True',
-             'description': 'The Most Desirable organization', })
+        domain_choices = [
+            ("mailman.most-desirable.org", "mailman.most-desirable.org")]
+        style_choices = [
+            ("legacy-default", 'Ordinary discussion mailing list style.'),
+            ("legacy-announce", 'Announce only mailing list style.')]
+        form = ListNew(domain_choices, style_choices,
+                       {'listname': 'xyz',
+                        'mail_host': 'mailman.most-desirable.org',
+                        'list_owner': 'contact@mailman.most-desirable.org',
+                        'advertised': 'True',
+                        'list_style': 'legacy-default',
+                        'description': 'The Most Desirable organization'})
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_form_fields_list_invalid(self):
-        form = ListNew([
-            ("mailman.most-desirable.org", "mailman.most-desirable.org")],
-            {'listname': 'xy#z',
-             'mail_host': 'mailman.most-desirable.org',
-             'list_owner': 'mailman.most-desirable.org',
-             'advertised': 'abcd',
-             'description': 'The Most Desirable organization', })
+        domain_choices = [
+            ("mailman.most-desirable.org", "mailman.most-desirable.org")]
+        style_choices = [
+            ("legacy-default", 'Ordinary discussion mailing list style.'),
+            ("legacy-announce", 'Announce only mailing list style.')]
+        form = ListNew(domain_choices, style_choices,
+                       {'listname': 'xy#z',
+                        'mail_host': 'mailman.most-desirable.org',
+                        'list_owner': 'mailman.most-desirable.org',
+                        'advertised': 'abcd',
+                        'list_style': 'defg',
+                        'description': 'The Most Desirable organization'})
         self.assertFalse(form.is_valid())
         # Test that all invalid fields are actually checked.
         for field in ('list_owner', 'advertised'):
             self.assertTrue(field in form.errors)
         self.assertTrue('Enter a valid email address.' in
                         form.errors['list_owner'])
-        self.assertTrue('Select a valid choice. abcd is not one of the available choices.'   # noqa
-                        in form.errors['advertised'])
+        self.assertTrue(
+            'Select a valid choice. abcd is not one of the available choices.'
+            in form.errors['advertised'])
 
     def test_form_without_domain_choices(self):
         form = ListNew([],
@@ -152,13 +163,17 @@ class TestListNew(TestCase):
                         'Site admin has not created any domains')
 
     def test_listname_validation(self):
-        form = ListNew([
-            ("mailman.most-desirable.org", "mailman.most-desirable.org")],
-            {'listname': 'xy@z',
-             'mail_host': 'mailman.most-desirable.org',
-             'list_owner': 'mailman.most-desirable.org',
-             'advertised': 'abcd',
-             'description': 'The Most Desirable organization', })
+        domain_choices = [
+            ("mailman.most-desirable.org", "mailman.most-desirable.org")]
+        style_choices = [
+            ("legacy-default", 'Ordinary discussion mailing list style.'),
+            ("legacy-announce", 'Announce only mailing list style.')]
+        form = ListNew(domain_choices, style_choices,
+                       {'listname': 'xy@z',
+                        'mail_host': 'mailman.most-desirable.org',
+                        'list_owner': 'mailman.most-desirable.org',
+                        'advertised': 'abcd',
+                        'description': 'The Most Desirable organization', })
         self.assertFalse(form.is_valid())
         self.assertTrue('listname' in form.errors)
         self.assertTrue('Please enter a valid listname' in
@@ -176,21 +191,32 @@ class TestListNew(TestCase):
              'description': 'The Most Desirable organization', })
         self.assertFalse(form.is_valid())
         self.assertTrue('listname' in form.errors)
-        self.assertEqual('Please enter a valid listname, "@" is not allowed in listname',    # noqa
-                        form.errors['listname'])
+        self.assertEqual(
+            'Please enter a valid listname, "@" is not allowed in listname',
+            form.errors['listname'])
 
     def test_form_fields_order(self):
-        form = ListNew([
-            ("mailman.most-desirable.org", "mailman.most-desirable.org")],
-            {'listname': 'xyz',
-             'mail_host': 'mailman.most-desirable.org',
-             'list_owner': 'mailman@most-desirable.org',
-             'advertised': 'True',
-             'description': 'The Most Desirable organization', })
+        domain_choices = [
+            ("mailman.most-desirable.org", "mailman.most-desirable.org")]
+        style_choices = [
+            ("legacy-default", 'Ordinary discussion mailing list style.'),
+            ("legacy-announce", 'Announce only mailing list style.')]
+        form = ListNew(domain_choices, style_choices,
+                       {'listname': 'xyz',
+                        'mail_host': 'mailman.most-desirable.org',
+                        'list_owner': 'mailman@most-desirable.org',
+                        'list_style': 'legacy-default',
+                        'advertised': 'True',
+                        'description': 'The Most Desirable organization', })
         self.assertTrue(form.is_valid())
         # The order of the fields should remain exactly like this.
         self.assertEqual(list(form.fields),
-                         ['listname', 'mail_host', 'list_owner', 'advertised', 'description'])   # noqa
+                         ['listname',
+                          'mail_host',
+                          'list_owner',
+                          'advertised',
+                          'list_style',
+                          'description'])
 
 
 class TestListIdentityForm(TestCase):

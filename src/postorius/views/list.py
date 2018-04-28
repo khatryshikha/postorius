@@ -43,7 +43,7 @@ from postorius.forms import (
     ListIdentityForm, ListMassSubscription, ListMassRemoval, ListAddBanForm,
     ListHeaderMatchForm, ListHeaderMatchFormset, MemberModeration,
     DMARCMitigationsForm, ListAnonymousSubscribe)
-from postorius.models import Domain, List, Mailman404Error
+from postorius.models import Domain, List, Mailman404Error, Style
 from postorius.auth.decorators import (
     list_owner_required, list_moderator_required, superuser_required)
 from postorius.views.generic import MailingListView
@@ -527,6 +527,19 @@ def _get_choosable_domains(request):
     return [(d.mail_host, d.mail_host) for d in domains]
 
 
+def _get_choosable_styles(request):
+    styles = Style.objects.all()
+    options = [(style['name'], style['description'])
+               for style in styles['styles']]
+    # Reorder to put the default at the beginning
+    for style_option in options:
+        if style_option[0] == styles['default']:
+            options.remove(style_option)
+            options.insert(0, style_option)
+            break
+    return options
+
+
 @login_required
 @superuser_required
 def list_new(request, template='postorius/lists/new.html'):
@@ -542,8 +555,9 @@ def list_new(request, template='postorius/lists/new.html'):
     mailing_list = None
     choosable_domains = [('', _('Choose a Domain'))]
     choosable_domains += _get_choosable_domains(request)
+    choosable_styles = _get_choosable_styles(request)
     if request.method == 'POST':
-        form = ListNew(choosable_domains, request.POST)
+        form = ListNew(choosable_domains, choosable_styles, request.POST)
         if form.is_valid():
             # grab domain
             domain = Domain.objects.get_or_404(
@@ -551,7 +565,8 @@ def list_new(request, template='postorius/lists/new.html'):
             # creating the list
             try:
                 mailing_list = domain.create_list(
-                    form.cleaned_data['listname'])
+                    form.cleaned_data['listname'],
+                    style_name=form.cleaned_data['list_style'])
                 mailing_list.add_owner(form.cleaned_data['list_owner'])
                 list_settings = mailing_list.settings
                 if form.cleaned_data['description']:
@@ -569,7 +584,7 @@ def list_new(request, template='postorius/lists/new.html'):
         else:
             messages.error(request, _('Please check the errors below'))
     else:
-        form = ListNew(choosable_domains, initial={
+        form = ListNew(choosable_domains, choosable_styles, initial={
             'list_owner': request.user.email,
             'advertised': True,
             })

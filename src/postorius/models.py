@@ -199,3 +199,9 @@ class Member(MailmanRestModel):
     """Member model class.
     """
     objects = MailmanRestManager('member', 'members')
+
+
+class Style(MailmanRestModel):
+    """
+    """
+    objects = MailmanRestManager(None, 'styles')
