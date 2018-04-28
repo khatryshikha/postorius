@@ -23,6 +23,12 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 (XXXX-XX-XX)
 * Postorius now runs only on Python 3.4+ and supports Django 1.8 and 1.11+
 * Added the ability to set and edit ``alias_domain`` to the ``domains`` forms.
+* List Create form now allows selecting the ``style``. A ``style`` is how a new
+  mailing list is configured.
+* Minimum supported Mailman Core version is now 3.2.0. This is because the
+  ``styles`` attribute for MailingList resource is exposed in 3.2, which
+  contains all the default ``styles`` supported by Core and their human readable
+  description.
 
 1.1.2
 =====

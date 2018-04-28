@@ -61,11 +61,12 @@ class ListNew(forms.Form):
         choices=(
             (True, _("Advertise this list in list index")),
             (False, _("Hide this list in list index"))))
+    list_style = forms.ChoiceField()
     description = forms.CharField(
         label=_('Description'),
         required=False)
 
-    def __init__(self, domain_choices, *args, **kwargs):
+    def __init__(self, domain_choices, style_choices, *args, **kwargs):
         super(ListNew, self).__init__(*args, **kwargs)
         self.fields["mail_host"] = forms.ChoiceField(
             widget=forms.Select(),
@@ -73,7 +74,14 @@ class ListNew(forms.Form):
             required=True,
             choices=domain_choices,
             error_messages={'required': _("Choose an existing Domain."),
-                            'invalid': "Choose a valid Mail Host"})
+                            'invalid': _("Choose a valid Mail Host")})
+        self.fields["list_style"] = forms.ChoiceField(
+            widget=forms.Select(),
+            label=_('List Style'),
+            required=True,
+            choices=style_choices,
+            error_messages={'required': _("Choose a List Style."),
+                            'invalid': _("Choose a valid List Style.")})
         if len(domain_choices) < 2:
             self.fields["mail_host"].help_text = _(
                 "Site admin has not created any domains")
@@ -104,6 +112,7 @@ class ListNew(forms.Form):
         layout = [["List Details",
                    "listname",
                    "mail_host",
+                   "list_style",
                    "list_owner",
                    "description",
                    "advertised"], ]
