@@ -38,7 +38,7 @@ pep8:
 django-1.11-git:
   stage: test
   script:
-  - tox -e py36-django-latest-head
+  - tox -e py36-head
 
 django-latest:
   stage: test
