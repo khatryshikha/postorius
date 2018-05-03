@@ -41,6 +41,22 @@ class ListCreationTest(ViewTestCase):
         response = self.client.get(reverse('list_new'))
         self.assertEqual(response.status_code, 403)
 
+    def test_duplicate_listname_validation(self):
+        # First, let's create a mailing list.
+        self.domain.create_list('foo')
+        self.client.login(username='su', password='pwd')
+        post_data = {'listname': 'foo',
+                     'mail_host': 'example.com',
+                     'list_owner': 'owner@example.com',
+                     'advertised': 'True',
+                     'list_style': 'legacy-default',
+                     'description': 'A new list.'}
+        response = self.client.post(reverse('list_new'), post_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Mailing List already exists')
+        # Make sure this is the list create form and not just error page.
+        self.assertContains(response, 'Create a new list')
+
     def test_new_list_created_with_owner(self):
         self.client.login(username='su', password='pwd')
         post_data = {'listname': 'a_new_list',

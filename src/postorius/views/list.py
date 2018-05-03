@@ -579,6 +579,14 @@ def list_new(request, template='postorius/lists/new.html'):
                                 list_id=mailing_list.list_id)
             # TODO catch correct Error class:
             except HTTPError as e:
+                # Right now, there is no good way to detect that this is a
+                # duplicate mailing list request other than checking the
+                # reason for 400 error.
+                if e.reason == b'Mailing list exists':
+                    form.add_error(
+                        'listname', _('Mailing List already exists.'))
+                    return render(request, template, {'form': form})
+                # Otherwise just render the generic error page.
                 return render(request, 'postorius/errors/generic.html',
                               {'error': e})
         else:
