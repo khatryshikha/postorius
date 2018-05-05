@@ -22,10 +22,19 @@ Authentication and authorization-related utilities.
 
 from allauth.account.models import EmailAddress
 from django.utils import six
-from postorius.models import List
+from postorius.models import Domain, List
 
 
 def user_is_in_list_roster(user, mailing_list, roster):
+    """Checks if a user is in a MailingList roster.
+
+    :param user: User to check access permissions for.
+    :type user: django.contrib.auth.model.User
+    :param mailing_list: MailingList to check permissions for.
+    :type mailing_list: postorius.models.List
+    :param roster: Access permissions required.
+    :type roster: str
+    """
     if not user.is_authenticated:
         return False
     addresses = set(EmailAddress.objects.filter(
@@ -35,7 +44,14 @@ def user_is_in_list_roster(user, mailing_list, roster):
     return False
 
 
-def set_user_access_props(user, mlist):
+def set_list_access_props(user, mlist):
+    """Update user's access permissions of a MailingList.
+
+    :param user: The user to check permissions for.
+    :type user: django.contrib.auth.model.User
+    :param mlist: MailingList to check permissions for.
+    :type mlist: postorius.models.List
+    """
     if isinstance(mlist, six.string_types):
         mlist = List.objects.get_or_404(mlist)
     if not hasattr(user, 'is_list_owner'):
@@ -44,3 +60,17 @@ def set_user_access_props(user, mlist):
     if not hasattr(user, 'is_list_moderator'):
         user.is_list_moderator = user_is_in_list_roster(
             user, mlist, "moderators")
+
+
+def set_domain_access_props(user, domain):
+    """Update user's access permissions for a domain.
+
+    :param user: The user to check permissions for.
+    :type user: django.contrib.auth.model.User
+    :param mlist: Domain to check permissions for.
+    :type mlist: postorius.models.Domain
+    """
+    if isinstance(domain, six.string_types):
+        domain = Domain.objects.get_or_404(domain)
+    if not hasattr(user, 'is_domain_owner'):
+        user.is_domain_owner = (user in domain.owners)
