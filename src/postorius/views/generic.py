@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from django_mailman3.lib.mailman import get_mailman_client
 
 from postorius.models import List
-from postorius.auth.utils import set_user_access_props
+from postorius.auth.utils import set_list_access_props
 
 
 class MailmanClientMixin(object):
@@ -50,7 +50,7 @@ class MailingListView(TemplateView, MailmanClientMixin):
         if 'list_id' in kwargs:
             self.mailing_list = self._get_list(kwargs['list_id'],
                                                int(kwargs.get('page', 1)))
-            set_user_access_props(request.user, self.mailing_list)
+            set_list_access_props(request.user, self.mailing_list)
         # set the template
         if 'template' in kwargs:
             self.template = kwargs['template']

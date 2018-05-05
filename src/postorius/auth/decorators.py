@@ -20,7 +20,7 @@
 
 from django.core.exceptions import PermissionDenied
 
-from postorius.auth.utils import set_user_access_props
+from postorius.auth.utils import set_list_access_props
 
 
 def list_owner_required(fn):
@@ -35,7 +35,7 @@ def list_owner_required(fn):
             raise PermissionDenied
         if user.is_superuser:
             return fn(*args, **kwargs)
-        set_user_access_props(user, list_id)
+        set_list_access_props(user, list_id)
         if user.is_list_owner:
             return fn(*args, **kwargs)
         else:
@@ -55,7 +55,7 @@ def list_moderator_required(fn):
             raise PermissionDenied
         if user.is_superuser:
             return fn(*args, **kwargs)
-        set_user_access_props(user, list_id)
+        set_list_access_props(user, list_id)
         if user.is_list_owner or user.is_list_moderator:
             return fn(*args, **kwargs)
         else:
