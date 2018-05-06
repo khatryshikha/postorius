@@ -100,6 +100,7 @@ def get_vcr(**kwargs):
         filter_headers=['authorization', 'user-agent', 'date'],
         before_record=reorder_request_params,
         before_record_response=filter_response_headers,
+        record_mode=vcr_record_mode,
         **kwargs
     )
 
