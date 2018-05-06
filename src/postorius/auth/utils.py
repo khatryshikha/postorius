@@ -72,7 +72,15 @@ def set_domain_access_props(user, domain):
     :param mlist: Domain to check permissions for.
     :type mlist: postorius.models.Domain
     """
+    # TODO: This is very slow as it involves first iterating over every domain
+    # owner and then each of their addresses. Create an API in Core to
+    # facilitate this.
     if isinstance(domain, six.string_types):
         domain = Domain.objects.get_or_404(domain)
-    if not hasattr(user, 'is_domain_owner'):
-        user.is_domain_owner = (user in domain.owners)
+    owner_addresses = []
+    for owner in domain.owners:
+        owner_addresses.extend(owner.addresses)
+    owner_addresses = set([each.email for each in owner_addresses])
+    user_addresses = set(EmailAddress.objects.filter(
+        user=user, verified=True).values_list("email", flat=True))
+    user.is_domain_owner = owner_addresses & user_addresses
