@@ -87,7 +87,7 @@ def list_members_view(request, list_id, role=None):
                            'role': role})
                     return redirect('list_members', list_id, role)
                 except HTTPError as e:
-                    messages.error(request, _(e.msg))
+                    messages.error(request, e.msg)
     else:
         form = MultipleChoiceForm()
         member_form = MemberForm()
