@@ -819,7 +819,7 @@ def remove_all_subscribers(request, list_id):
                 mlist.unsubscribe(names.email)
             messages.success(request, _('All members have been'
                                         ' unsubscribed from the list.'))
-            return redirect('list_members', mlist.list_id)
+            return redirect('list_members', mlist.list_id, 'subscriber')
         except Exception as e:
             messages.error(request, e)
     return render(request,
