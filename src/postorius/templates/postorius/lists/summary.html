@@ -100,7 +100,7 @@
     {% if user.is_authenticated %}
         {% if user.is_list_owner or user.is_superuser %}
             <hr />
-            <h4>{% trans 'List metrics' %}</h4>
+            <h3>{% trans 'List metrics' %}</h3>
             <dl class="dl-horizontal">
               <dt>{% trans 'Created at' %}</dt><dd>{{ list.settings.created_at }}</dd>
               <dt>{% trans 'Last post at' %}</dt><dd>{{ list.settings.last_post_at }}</dd>
