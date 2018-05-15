@@ -101,14 +101,17 @@ class AddRemoveOwnerTest(ViewTestCase):
         url = reverse('list_members', args=('foo@example.com', 'owner',))
         response = self.client.post(url, {'email': 'newowner@example.com'})
         self.assertRedirects(response, url)
-        self.assertTrue('newowner@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in self.foo_list.owners]
+        self.assertTrue('newowner@example.com' in owners_emails)
         self.client.post(
             reverse('remove_role', args=('foo@example.com', 'owner',
                                          'newowner@example.com')))
-        self.assertFalse('newowner@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in self.foo_list.owners]
+        self.assertFalse('newowner@example.com' in owners_emails)
 
     def test_remove_owner_by_owner(self):
-        self.assertTrue('su@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in self.foo_list.owners]
+        self.assertTrue('su@example.com' in owners_emails)
         # Make the logged in user a simple list owner
         self.su.is_superuser = False
         self.su.save()
@@ -116,37 +119,43 @@ class AddRemoveOwnerTest(ViewTestCase):
         url = reverse('list_members', args=('foo@example.com', 'owner',))
         response = self.client.post(url, {'email': 'newowner@example.com'})
         self.assertRedirects(response, url)
-        self.assertTrue('newowner@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in self.foo_list.owners]
+        self.assertTrue('newowner@example.com' in owners_emails)
         response = self.client.post(
             reverse('remove_role', args=('foo@example.com', 'owner',
                                          'newowner@example.com')))
-        self.assertFalse('newowner@example.com' in self.foo_list.owners)
         self.assertHasSuccessMessage(response)
+        owners_emails = [owner.email for owner in self.foo_list.owners]
+        self.assertFalse('newowner@example.com' in owners_emails)
 
     def test_remove_owner_as_owner_self_last(self):
         # It is allowed to remove itself, but only if there's another owner
         # left.
         mm_list = self.mm_client.get_list('foo@example.com')
         mm_list.add_owner('otherowner@example.com')
-        self.assertTrue('su@example.com' in self.foo_list.owners)
-        self.assertTrue('otherowner@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in mm_list.owners]
+        self.assertTrue('su@example.com' in owners_emails)
+        self.assertTrue('otherowner@example.com' in owners_emails)
         response = self.client.post(
             reverse('remove_role', args=('foo@example.com', 'owner',
                                          'su@example.com')))
-        self.assertFalse('su@example.com' in self.foo_list.owners)
         self.assertEqual(response.status_code, 302)
         self.assertHasSuccessMessage(response)
+        owners_emails = [owner.email for owner in mm_list.owners]
+        self.assertFalse('su@example.com' in owners_emails)
         # But not to remove the last owner
         mm_list.add_owner('su@example.com')
         mm_list.remove_owner('otherowner@example.com')
-        self.assertTrue('su@example.com' in self.foo_list.owners)
-        self.assertFalse('otherowner@example.com' in self.foo_list.owners)
+        owners_emails = [owner.email for owner in mm_list.owners]
+        self.assertTrue('su@example.com' in owners_emails)
+        self.assertFalse('otherowner@example.com' in owners_emails)
         response = self.client.post(
             reverse('remove_role', args=('foo@example.com', 'owner',
                                          'su@example.com')))
-        self.assertTrue('su@example.com' in self.foo_list.owners)
         self.assertEqual(response.status_code, 302)
         self.assertHasErrorMessage(response)
+        owners_emails = [owner.email for owner in mm_list.owners]
+        self.assertTrue('su@example.com' in owners_emails)
 
 
 class AddModeratorTest(ViewTestCase):
@@ -175,7 +184,8 @@ class AddModeratorTest(ViewTestCase):
         self.domain.delete()
 
     def test_new_moderator_added(self):
-        self.assertTrue('newmod@example.com' in self.foo_list.moderators)
+        mods_emails = [mod.email for mod in self.foo_list.moderators]
+        self.assertTrue('newmod@example.com' in mods_emails)
 
 
 class ListMembersTest(ViewTestCase):

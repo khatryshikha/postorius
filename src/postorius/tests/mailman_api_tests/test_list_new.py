@@ -70,7 +70,8 @@ class ListCreationTest(ViewTestCase):
         # self.assertHasSuccessMessage(response)
         a_new_list = self.mm_client.get_list('a_new_list@example.com')
         self.assertEqual(a_new_list.fqdn_listname, 'a_new_list@example.com')
-        self.assertEqual(a_new_list.owners, ['owner@example.com'])
+        owner_emails = [owner.email for owner in a_new_list.owners]
+        self.assertEqual(owner_emails, ['owner@example.com'])
 
     def test_listname_validation(self):
         self.client.login(username='su', password='pwd')

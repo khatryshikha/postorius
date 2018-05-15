@@ -761,11 +761,10 @@ def remove_role(request, list_id=None, role=None, address=None,
                 template='postorius/lists/confirm_remove_role.html'):
     """Removes a list moderator or owner."""
     the_list = List.objects.get_or_404(fqdn_listname=list_id)
-
     redirect_on_success = redirect('list_members', the_list.list_id, role)
-
     roster = getattr(the_list, '{}s'.format(role))
-    if address not in roster:
+    all_emails = [each.email for each in roster]
+    if address not in all_emails:
         messages.error(request,
                        _('The user %(email)s is not in the %(role)s group')
                        % {'email': address, 'role': role})
