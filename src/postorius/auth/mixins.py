@@ -26,6 +26,8 @@ from postorius.auth.utils import set_domain_access_props, set_list_access_props
 class ListOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
     """Mixin to allow access to only List owners."""
 
+    raise_exception = True
+
     def test_func(self):
         user = self.request.user
         mlist_id = self.kwargs['list_id']
@@ -40,6 +42,8 @@ class ListOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
 class ListModeratorMixin(LoginRequiredMixin, UserPassesTestMixin):
     """Mixin to allow access to only List Moderators."""
 
+    raise_exception = True
+
     def test_func(self):
         user = self.request.user
         mlist_id = self.kwargs['list_id']
@@ -53,6 +57,8 @@ class ListModeratorMixin(LoginRequiredMixin, UserPassesTestMixin):
 
 class DomainOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
     """Mixin to allow access to only Domain Owner."""
+
+    raise_exception = True
 
     def test_func(self):
         user = self.request.user
