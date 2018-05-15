@@ -20,6 +20,9 @@
 from postorius import utils
 from postorius.models import MailmanApiError
 from mailmanclient import MailmanConnectionError
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 __all__ = [
@@ -36,6 +39,6 @@ class PostoriusMiddleware(object):
         return self.get_response(request)
 
     def process_exception(self, request, exception):
-        if isinstance(exception, MailmanApiError) or isinstance(
-                exception, MailmanConnectionError):
+        if isinstance(exception, (MailmanApiError, MailmanConnectionError)):
+            logger.exception('Mailman REST API not available')
             return utils.render_api_error(request)
