@@ -57,7 +57,7 @@ class DomainCreationTest(ViewTestCase):
 
         a_new_domain = self.mm_client.get_domain('example.com')
         self.assertEqual(a_new_domain.mail_host, 'example.com')
-        self.assertEqual(a_new_domain.owners[0]['user_id'],
+        self.assertEqual(a_new_domain.owners[0].user_id,
                          self.mm_client.get_user('su@example.com').user_id)
         self.assertTrue(
             MailDomain.objects.filter(mail_domain='example.com').exists())

@@ -39,7 +39,9 @@ def user_is_in_list_roster(user, mailing_list, roster):
         return False
     addresses = set(EmailAddress.objects.filter(
         user=user, verified=True).values_list("email", flat=True))
-    if addresses & set(getattr(mailing_list, roster)):
+    roster_addresses = set([member.email for member in
+                            set(getattr(mailing_list, roster))])
+    if addresses & roster_addresses:
         return True  # At least one address is in the roster
     return False
 

@@ -53,7 +53,7 @@ setup(
     install_requires=[
         'Django>=1.11',
         'django-mailman3>=1.2.0a1',
-        'mailmanclient>=3.2.0b1'
+        'mailmanclient>=3.2.0b2'
     ],
     tests_require=[
         "mock",
