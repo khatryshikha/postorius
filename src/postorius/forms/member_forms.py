@@ -28,3 +28,8 @@ class MemberForm(forms.Form):
         error_messages={
             'required': _('Please enter an email address.'),
             'invalid': _('Please enter a valid email address.')})
+    display_name = forms.CharField(
+        label=_('Display Name'),
+        required=False,
+        error_messages={
+            'invalid': _('Please enter an display name.')})

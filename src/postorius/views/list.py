@@ -79,7 +79,8 @@ def list_members_view(request, list_id, role=None):
             if member_form.is_valid():
                 try:
                     getattr(mailing_list, 'add_%s' % role)(
-                        member_form.cleaned_data['email'])
+                        member_form.cleaned_data['email'],
+                        display_name=member_form.cleaned_data['display_name'])
                     messages.success(
                         request, _('%(email)s has been added'
                                    ' with the role %(role)s')

@@ -27,6 +27,8 @@ class TestMemberForm(TestCase):
         form = MemberForm({})
         self.assertTrue('email' in form.fields.keys())
         self.assertEqual(form.fields['email'].label, 'Email Address')
+        self.assertTrue('display_name' in form.fields.keys())
+        self.assertEqual(form.fields['display_name'].label, 'Display Name')
 
     def test_form_errors(self):
         form = MemberForm({})
