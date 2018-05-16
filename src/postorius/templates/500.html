@@ -1,0 +1,7 @@
+{% extends "postorius/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Server error' %}</h1>
+    <div class="alert alert-danger">{% trans "An error occurred while processing your request." %}</div>
+{% endblock %}
