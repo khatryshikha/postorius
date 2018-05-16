@@ -172,9 +172,11 @@ class ListSettingsTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
         # Since there are no pending subscription requests, this page should be
         # empty.
+        self.assertContains(response, '<small>(0)</small>')
         self.assertTrue(
             b'There are currently no subscription requests for this list.'
             in response.content)
+        self.assertNotContains(response, '<div class="paginator">')
         # Now we set the subscription policy to moderate so that all
         # subscriptions are held for moderator approval.
         self.foo_list.settings['subscription_policy'] = 'moderate'
@@ -188,6 +190,9 @@ class ListSettingsTest(ViewTestCase):
         for email in ('test@example.com', 'owner@example.com',
                       'moderator@example.com'):
             self.assertTrue(email in str(response.content))
+        self.assertContains(response, '<small>(3)</small>')
+        # Verify that the list is paginated
+        self.assertContains(response, '<div class="paginator">')
 
     def test_handle_subscription_request(self):
         self.client.login(username='testowner', password='testpass')
