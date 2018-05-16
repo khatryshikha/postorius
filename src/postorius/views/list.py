@@ -645,8 +645,16 @@ def list_subscription_requests(request, list_id):
     """Shows a list of subscription requests.
     """
     m_list = List.objects.get_or_404(fqdn_listname=list_id)
+    requests = m_list.requests
+    paginated_requests = paginate(
+        requests,
+        request.GET.get('page'),
+        request.GET.get('count', 25))
+    page_subtitle = '(%d)' % len(requests)
     return render(request, 'postorius/lists/subscription_requests.html',
-                  {'list': m_list})
+                  {'list': m_list,
+                   'paginated_requests': paginated_requests,
+                   'page_subtitle': page_subtitle})
 
 
 @login_required
