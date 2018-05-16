@@ -88,7 +88,7 @@ def list_members_view(request, list_id, role=None):
                            'role': role})
                     return redirect('list_members', list_id, role)
                 except HTTPError as e:
-                    messages.error(request, e.msg)
+                    messages.error(request, e.msg.decode())
     else:
         form = MultipleChoiceForm()
         member_form = MemberForm()
@@ -164,7 +164,7 @@ def list_member_options(request, list_id, email):
                 try:
                     member_prefs.save()
                 except HTTPError as e:
-                    messages.error(request, e.msg)
+                    messages.error(request, e.msg.decode())
                 else:
                     messages.success(request, _("The member's preferences have"
                                                 " been updated."))
@@ -183,7 +183,7 @@ def list_member_options(request, list_id, email):
                 try:
                     mm_member.save()
                 except HTTPError as e:
-                    messages.error(request, e.msg)
+                    messages.error(request, e.msg.decode())
                 else:
                     messages.success(request, _("The member's moderation "
                                                 "settings have been updated."))
@@ -290,7 +290,7 @@ class ChangeSubscriptionView(MailingListView):
                 messages.error(request,
                                _('Something went wrong. Please try again.'))
         except HTTPError as e:
-            messages.error(request, e.msg)
+            messages.error(request, e.msg.decode())
         return redirect('list_summary', self.mailing_list.list_id)
 
 
@@ -328,7 +328,7 @@ class ListSubscribeView(MailingListView):
                 messages.error(request,
                                _('Something went wrong. Please try again.'))
         except HTTPError as e:
-            messages.error(request, e.msg)
+            messages.error(request, e.msg.decode())
         return redirect('list_summary', self.mailing_list.list_id)
 
 
@@ -356,7 +356,7 @@ class ListAnonymousSubscribeView(MailingListView):
                 messages.error(request,
                                _('Something went wrong. Please try again.'))
         except HTTPError as e:
-            messages.error(request, e.msg)
+            messages.error(request, e.msg.decode())
         return redirect('list_summary', self.mailing_list.list_id)
 
 
@@ -589,7 +589,7 @@ def list_new(request, template='postorius/lists/new.html'):
                     return render(request, template, {'form': form})
                 # Otherwise just render the generic error page.
                 return render(request, 'postorius/errors/generic.html',
-                              {'error': e})
+                              {'error': e.msg.decode()})
         else:
             messages.error(request, _('Please check the errors below'))
     else:
@@ -796,7 +796,7 @@ def remove_role(request, list_id=None, role=None, address=None,
             the_list.remove_role(role, address)
         except HTTPError as e:
             messages.error(request, _('The user could not be removed: %(msg)s')
-                           % {'msg': e.msg})
+                           % {'msg': e.msg.decode()})
             return redirect('list_members', the_list.list_id, role)
         messages.success(request, _('The user %(address)s has been removed'
                                     ' from the %(role)s group.')
