@@ -75,3 +75,12 @@ a {
 .btn-success {
     background-color: #298529; 
 }
+.btn-warning {
+    background-color: #A4660E;
+}
+.alert-success {
+    color: #294C29;
+}
+.alert-danger {
+    color: #773231;
+}
