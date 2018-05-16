@@ -29,6 +29,9 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
   ``styles`` attribute for MailingList resource is exposed in 3.2, which
   contains all the default ``styles`` supported by Core and their human readable
   description.
+* Account subscription page now lists all the memberships with their respective
+  roles. This avoids repeated API calls for the way data was displayed
+  before. (Closes #205)
 
 1.1.2
 =====
