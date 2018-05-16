@@ -34,8 +34,11 @@ except ImportError:
 def _get_web_host_help():
     # Using a function is necessary, otherwise reverse() will be called before
     # URLConfs are loaded.
-    return (_('<a href="%s">Edit</a> the list of available web hosts.')
-            % reverse("admin:sites_site_changelist"))
+    return (_(
+        'The domain from which you want the web UI to be served from. '
+        'This can be same or different from the Mail Host. '
+        'You can edit the list of available web hosts <a href="%s">here</a>.'
+    ) % reverse("admin:sites_site_changelist"))
 
 
 class DomainForm(forms.Form):
@@ -47,7 +50,9 @@ class DomainForm(forms.Form):
         error_messages={'required': _('Please enter a domain name'),
                         'invalid': _('Please enter a valid domain name.')},
         required=True,
-        help_text=_('Example: domain.org'),
+        help_text=_(
+            'The domain for your mailing lists. For example when you want '
+            'lists like testing@example.com, enter example.com here.'),
         )
     description = forms.CharField(
         label=_('Description'),
