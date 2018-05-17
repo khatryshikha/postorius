@@ -5,7 +5,7 @@
 </div>
 
 {% if user.is_authenticated  %}
-<ul class="nav nav-pills">
+<ul class="nav nav-pills" role="tablist">
     <li role="tab" class="{% nav_active_class current 'list_summary' %}"><a href="{% url 'list_summary' list.list_id %}">{% trans 'Info' %}</a></li>
     {% if user.is_superuser or user.is_list_owner or user.is_list_moderator %}
         <li role="tab" class="{% nav_active_class current 'list_subscription_requests' %}"><a href="{% url 'list_subscription_requests' list.list_id %}">{% trans 'Subscription requests' %}</a></li>
