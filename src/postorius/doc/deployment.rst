@@ -126,6 +126,7 @@ postorius project directory and run:
 
 ::
 
+    $ mkdir locale
     $ python manage.py compilemessages
     $ python manage.py collectstatic
 
