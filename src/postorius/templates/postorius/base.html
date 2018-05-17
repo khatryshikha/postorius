@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" role="main">
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
         {% endfor %}
