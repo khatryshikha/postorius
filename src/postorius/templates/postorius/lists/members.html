@@ -40,9 +40,9 @@
         <div class="pull-left margin-bottom">
             <form action="{% url 'list_members' list.list_id role %}" method="get" class="form-inline">
                 <div class="input-group">
-                    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="{% trans 'Search members...' %}" />
+                    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="{% trans 'Search members...' %}" aria-label="Search box" />
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        <button class="btn btn-default" type="submit" aria-label="Search"><span class="glyphicon glyphicon-search"></span></button>
                     </span>
                 </div>
             </form>
@@ -68,7 +68,7 @@
                         <tr>
                             <th colspan="2">
                               {% if role == 'subscriber' %}
-                                    <input type="checkbox" id="all-members-checkbox"/>
+                                    <input type="checkbox" id="all-members-checkbox" aria-label="Select all members" />
                               {% endif %}
                               {% trans 'Address' %}
                             </th>
