@@ -154,34 +154,29 @@ def list_member_options(request, list_id, email):
         ])
     if request.method == 'POST':
         if request.POST.get("formname") == 'preferences':
-            moderation_form = MemberModeration(initial=initial_moderation)
             preferences_form = UserPreferences(
-                request.POST, initial=member_prefs)
+                request.POST, preferences=member_prefs)
             if preferences_form.is_valid():
-                if not preferences_form.has_changed():
-                    messages.info(request,
-                                  _("No change to the member's preferences."))
-                    return redirect('list_member_options', list_id, email)
-                for key in list(preferences_form.fields.keys()):
-                    member_prefs[key] = preferences_form.cleaned_data[key]
                 try:
-                    member_prefs.save()
+                    preferences_form.save()
                 except HTTPError as e:
                     messages.error(request, e.msg.decode())
                 else:
-                    messages.success(request, _("The member's preferences have"
-                                                " been updated."))
-                    return redirect('list_member_options', list_id, email)
+                    messages.success(request, _("The member's preferences"
+                                                " have been updated."))
+            return redirect('list_member_options', list_id, email)
         elif request.POST.get("formname") == 'moderation':
-            preferences_form = UserPreferences(initial=member_prefs)
             moderation_form = MemberModeration(
                 request.POST, initial=initial_moderation)
             if moderation_form.is_valid():
                 if not moderation_form.has_changed():
-                    messages.info(request,
-                                  _("No change to the member's moderation."))
+                    messages.info(
+                        request, _("No change to the member's moderation."))
                     return redirect('list_member_options', list_id, email)
                 for key in list(moderation_form.fields.keys()):
+                    # In general, it would be a very bad idea to loop over the
+                    # fields and try to set them one by one, However,
+                    # moderation form has only one field.
                     setattr(mm_member, key, moderation_form.cleaned_data[key])
                 try:
                     mm_member.save()
@@ -190,9 +185,9 @@ def list_member_options(request, list_id, email):
                 else:
                     messages.success(request, _("The member's moderation "
                                                 "settings have been updated."))
-                    return redirect('list_member_options', list_id, email)
+                return redirect('list_member_options', list_id, email)
     else:
-        preferences_form = UserPreferences(initial=member_prefs)
+        preferences_form = UserPreferences(preferences=member_prefs)
         moderation_form = MemberModeration(initial=initial_moderation)
     return render(request, template_name, {
         'mm_member': mm_member,
