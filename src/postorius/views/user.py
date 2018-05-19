@@ -308,6 +308,6 @@ class UserSubscriptionPreferencesView(UserPreferencesView):
 def user_subscriptions(request):
     """Shows the subscriptions of a user."""
     mm_user = MailmanUser.objects.get_or_create_from_django(request.user)
-    memberships = [m for m in mm_user.subscriptions if m.role == 'member']
+    memberships = [m for m in mm_user.subscriptions]
     return render(request, 'postorius/user/subscriptions.html',
                   {'memberships': memberships})
