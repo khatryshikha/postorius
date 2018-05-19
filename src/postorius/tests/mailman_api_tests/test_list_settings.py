@@ -19,15 +19,11 @@
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from postorius.views.list import SETTINGS_FORMS
 from postorius.models import List
 from postorius.tests.utils import ViewTestCase
-
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 
 
 class ListSettingsTest(ViewTestCase):

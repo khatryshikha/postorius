@@ -18,11 +18,8 @@
 #
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 from django.contrib.sites.models import Site
+from django.urls import reverse
 from django_mailman3.models import MailDomain
 
 from postorius.tests.utils import ViewTestCase

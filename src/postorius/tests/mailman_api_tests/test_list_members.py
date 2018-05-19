@@ -18,10 +18,7 @@
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.urls import reverse
 
 from postorius.tests.utils import ViewTestCase
 

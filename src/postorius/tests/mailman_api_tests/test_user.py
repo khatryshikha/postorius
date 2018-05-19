@@ -18,10 +18,7 @@
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.urls import reverse
 from django.test.utils import override_settings
 # Temporarily disabled with test_rpeferences_none
 # from mock import patch

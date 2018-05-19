@@ -17,11 +17,7 @@
 
 
 from django.test import TestCase
-
-try:
-    from django.core.urlresolvers import reverse, NoReverseMatch
-except ImportError:
-    from django.urls import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
 
 
 class URLTest(TestCase):
