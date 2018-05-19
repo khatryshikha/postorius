@@ -36,19 +36,20 @@ class TestMiddleware(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
 
+    @mock.patch('httplib2.Http.request')
     @mock.patch('postorius.views.list.list_index')
-    def test_middleware_request(self, mock_method):
+    def test_middleware_request(self, mock_request, mock_list_index):
         # Mock the view function to raise MailmanApiError and verify
         # the behavior of the middleware function.
-        mock_method.side_effect = MailmanApiError
+        mock_list_index.side_effect = MailmanApiError
         response = self.client.get(reverse('list_index'))
         # Check that correct error page is rendered.
         self.assertEqual('Mailman REST API not available. Please start Mailman core.',    # noqa
                          response.context['error'])
-        mock_method.reset_mock()
+        mock_list_index.reset_mock()
         # Check similar semantics with MailmanConnectionError from
         # mailmanclient.
-        mock_method.side_effect = MailmanConnectionError
+        mock_list_index.side_effect = MailmanConnectionError
         response = self.client.get(reverse('list_index'))
         self.assertEqual('Mailman REST API not available. Please start Mailman core.',    # noqa
                          response.context['error'])
