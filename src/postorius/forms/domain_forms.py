@@ -20,15 +20,11 @@
 from django import forms
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 
 from postorius.forms.fields import SiteModelChoiceField
-
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 
 
 def _get_web_host_help():

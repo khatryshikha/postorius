@@ -25,16 +25,11 @@ from email.parser import HeaderParser
 from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
+from django.urls import reverse
 
 from postorius.auth.decorators import list_moderator_required
 from postorius.models import List
 from django_mailman3.lib.scrub import Scrubber
-
-
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 
 
 def parse(message):

@@ -27,6 +27,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
+from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
 from django.http import Http404
 
@@ -36,11 +37,6 @@ from postorius.forms import (
 from postorius.views.generic import MailmanClientMixin
 from django_mailman3.lib.mailman import get_mailman_client
 
-
-try:
-    from django.core.urlresolvers import reverse, reverse_lazy
-except ImportError:
-    from django.urls import reverse, reverse_lazy
 
 logger = logging.getLogger(__name__)
 

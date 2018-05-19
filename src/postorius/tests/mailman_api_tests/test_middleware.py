@@ -19,12 +19,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import mock
-try:
-    # For django 1.10+
-    from django.urls import reverse
-except ImportError:
-    # For django < 1.10
-    from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase, RequestFactory
 
 from postorius.models import MailmanApiError

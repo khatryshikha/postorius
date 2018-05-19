@@ -19,10 +19,7 @@
 from allauth.account.models import EmailAddress
 from django.conf import settings
 from django.contrib.auth.models import User
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.urls import reverse
 from django_mailman3.lib.mailman import get_mailman_client
 from six.moves.urllib_parse import quote
 

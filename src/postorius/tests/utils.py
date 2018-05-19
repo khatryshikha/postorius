@@ -22,10 +22,7 @@ import logging
 
 from django.conf import settings
 from django.contrib import messages
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
+from django.urls import reverse
 from django.test import TransactionTestCase
 from mock import MagicMock
 from six import binary_type, text_type, PY3

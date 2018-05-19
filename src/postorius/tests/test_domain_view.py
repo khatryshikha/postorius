@@ -17,12 +17,9 @@
 
 
 from allauth.account.models import EmailAddress
-from django.test import TestCase
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 from django.contrib.auth.models import User
+from django.test import TestCase
+from django.urls import reverse
 from postorius.forms import DomainForm
 
 

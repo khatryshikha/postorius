@@ -30,6 +30,7 @@ from django.core.validators import validate_email
 from django.forms import formset_factory
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django_mailman3.lib.mailman import get_mailman_client
@@ -47,11 +48,6 @@ from postorius.models import Domain, List, Mailman404Error, Style
 from postorius.auth.decorators import (
     list_owner_required, list_moderator_required, superuser_required)
 from postorius.views.generic import MailingListView
-
-try:
-    from django.core.urlresolvers import reverse
-except ImportError:
-    from django.urls import reverse
 
 
 logger = logging.getLogger(__name__)
