@@ -113,6 +113,7 @@ def list_members_view(request, list_id, role=None):
             request.GET.get('page'),
             request.GET.get('count', 25),
             paginator_class=MailmanPaginator)
+        context['page_subtitle'] = '(%d)' % context['members'].paginator.count
         if mailing_list.member_count == 0:
             context['empty_error'] = _('List has no Subscribers')
         else:
@@ -123,10 +124,12 @@ def list_members_view(request, list_id, role=None):
         context['member_form'] = member_form
         if role == 'owner':
             context['page_title'] = _('List owners')
+            context['page_subtitle'] = '(%d)' % len(mailing_list.owners)
             context['members'] = mailing_list.owners
             context['form_action'] = _('Add owner')
         elif role == 'moderator':
             context['page_title'] = _('List moderators')
+            context['page_subtitle'] = '(%d)' % len(mailing_list.moderators)
             context['members'] = mailing_list.moderators
             context['empty_error'] = _('List has no moderators')
             context['form_action'] = _('Add moderator')

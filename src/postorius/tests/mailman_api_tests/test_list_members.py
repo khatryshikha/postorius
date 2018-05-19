@@ -221,6 +221,7 @@ class ListMembersTest(ViewTestCase):
         self.assertEqual(response.context['members'].paginator.count, 2)
         self.assertContains(response, member_1.email)
         self.assertContains(response, member_2.email)
+        self.assertContains(response, '<small>(2)</small>')
 
     def test_search_members_1(self):
         self.client.login(username='testsu', password='testpass')
@@ -237,6 +238,7 @@ class ListMembersTest(ViewTestCase):
         self.assertEqual(len(response.context['members']), 2)
         self.assertContains(response, member_1.email)
         self.assertContains(response, member_2.email)
+        self.assertContains(response, '<small>(2)</small>')
         response = self.client.get(reverse(
             'list_members', args=['foo@example.com', 'subscriber']),
             {'q': 'member-1'})
@@ -244,6 +246,7 @@ class ListMembersTest(ViewTestCase):
         self.assertEqual(len(response.context['members']), 1)
         self.assertContains(response, member_1.email)
         self.assertNotContains(response, member_2.email)
+        self.assertContains(response, '<small>(1)</small>')
         response = self.client.get(reverse(
             'list_members', args=['foo@example.com', 'subscriber']),
             {'q': 'not_a_member'})
@@ -251,6 +254,7 @@ class ListMembersTest(ViewTestCase):
         self.assertEqual(len(response.context['members']), 0)
         self.assertNotContains(response, member_1.email)
         self.assertNotContains(response, member_2.email)
+        self.assertContains(response, '<small>(0)</small>')
         self.assertEqual(response.context['empty_error'],
                          'No member was found matching the search')
         self.foo_list.unsubscribe('member-1@example.com')
@@ -262,3 +266,4 @@ class ListMembersTest(ViewTestCase):
         self.assertEqual(len(response.context['members']), 0)
         self.assertEqual(response.context['empty_error'],
                          'List has no Subscribers')
+        self.assertContains(response, '<small>(0)</small>')

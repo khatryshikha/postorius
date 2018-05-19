@@ -10,7 +10,7 @@
 
 {% block content %}
 
-    {% list_nav 'list_members' page_title %}
+    {% list_nav 'list_members' page_title page_subtitle %}
 
     {% if role != 'subscriber' %}
         <form action="{% url 'list_members' list.list_id role %}" method="post" class="form-inline margin-bottom">
