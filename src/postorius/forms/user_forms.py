@@ -130,7 +130,7 @@ class UserPreferences(forms.Form):
                 # when Mailman accepts None as a "reset to default"
                 # value.
                 self._preferences[key] = self.cleaned_data[key]
-                self._preferences.save()
+        self._preferences.save()
 
 
 class UserPreferencesFormset(forms.BaseFormSet):
