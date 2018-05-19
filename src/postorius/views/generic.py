@@ -17,6 +17,7 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django_mailman3.lib.mailman import get_mailman_client
 
@@ -41,6 +42,13 @@ class MailingListView(TemplateView, MailmanClientMixin):
 
     Sets self.mailing_list to list object if list_id is in **kwargs.
     """
+    def get(self, request):
+        # This should be overridden by the subclass.
+        return HttpResponse(status=405)
+
+    def post(self, request):
+        # This should be overridden by the subclass.
+        return HttpResponse(status=405)
 
     def _get_list(self, list_id, page):
         return List.objects.get_or_404(fqdn_listname=list_id)
