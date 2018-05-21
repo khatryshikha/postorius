@@ -99,7 +99,7 @@
                                             {{ member.email }}
                                         {% endif %}
                                     </td>
-                                    <td><a href="{% url 'remove_role' list.list_id role member %}" class="btn btn-xs btn-danger">{% trans 'Delete' %}</a></td>
+                                    <td><a href="{% url 'remove_role' list.list_id role member.email %}" class="btn btn-xs btn-danger">{% trans 'Delete' %}</a></td>
                                 {% endif %}
                             </tr>
                         {% endfor %}
