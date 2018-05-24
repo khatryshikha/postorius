@@ -119,9 +119,9 @@ def domain_edit(request, domain):
 def domain_delete(request, domain):
     """Deletes a domain but asks for confirmation first.
     """
+    domain_obj = Domain.objects.get(mail_host=domain)
     if request.method == 'POST':
         try:
-            domain_obj = Domain.objects.get(mail_host=domain)
             domain_obj.delete()
             MailDomain.objects.filter(mail_domain=domain).delete()
             messages.success(request,
@@ -131,5 +131,7 @@ def domain_delete(request, domain):
             messages.error(request,
                            _('The domain could not be deleted: %s' % e.msg))
             return redirect("domain_index")
+    domain_lists_page = domain_obj.get_list_page(count=10)
     return render(request, 'postorius/domain/confirm_delete.html',
-                  {'domain': domain})
+                  {'domain': domain_obj,
+                   'lists': domain_lists_page})
