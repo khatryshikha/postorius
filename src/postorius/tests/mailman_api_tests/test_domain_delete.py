@@ -80,6 +80,17 @@ class DomainDeleteTest(ViewTestCase):
         self.assertEqual(len(self.mm_client.domains), 1)
         self.assertEqual(len(self.mm_client.lists), 1)
 
+    def test_domain_delete_page_lists_all_mailinglists(self):
+        # Test that the domain delete page lists all the mailing lists
+        # associated with the domain.
+        self.client.login(username='testsu', password='testpass')
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(
+            'This would delete 1 lists, some of which are'
+            in str(response.content))
+        self.assertTrue('foo@example.com' in str(response.content))
+
     def test_domain_delete(self):
         # The domain should be deleted
         self.client.login(username='testsu', password='testpass')
