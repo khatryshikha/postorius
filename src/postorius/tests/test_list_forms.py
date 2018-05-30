@@ -426,7 +426,8 @@ class TestDigestSettingsForm(TestCase):
 
 class TestMessageAcceptanceForm(TestCase):
 
-    fields = ('acceptable_aliases', 'administrivia', 'default_member_action',
+    fields = ('acceptable_aliases', 'require_explicit_destination',
+              'administrivia', 'default_member_action',
               'default_nonmember_action', 'max_message_size')
 
     def prepare_formdata(self, values):
@@ -437,7 +438,7 @@ class TestMessageAcceptanceForm(TestCase):
         form = MessageAcceptanceForm({}, mlist=None)
         self.assertFalse(form.is_valid())
         # Now lets try with only required fields.
-        values = (None, None, 'hold', 'hold', 40)
+        values = (None, None, None, 'hold', 'hold', 40)
         form = MessageAcceptanceForm(self.prepare_formdata(values), mlist=None)
         print(form.errors)
         self.assertTrue(form.is_valid())
