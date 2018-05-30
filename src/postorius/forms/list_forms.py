@@ -251,6 +251,14 @@ class MessageAcceptanceForm(ListSettingsForm):
             'matched against every recipient address in the message. The '
             'matching is performed with Python\'s re.match() function, meaning'
             ' they are anchored to the start of the string.'))
+    require_explicit_destination = forms.BooleanField(
+        widget=forms.RadioSelect(choices=((True, _('Yes')), (False, _('No')))),
+        required=False,
+        label=_('Require Explicit Destination'),
+        help_text=_(
+            'This checks to ensure that the list posting address or an '
+            'acceptable alias explicitly appears in a To: or Cc: header in '
+            'the post.'))
     administrivia = forms.BooleanField(
         widget=forms.RadioSelect(choices=((True, _('Yes')), (False, _('No')))),
         required=False,

@@ -31,7 +31,9 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
   description.
 * Account subscription page now lists all the memberships with their respective
   roles. This avoids repeated API calls for the way data was displayed
-  before. (Closes #205)
+  before.  (Closes #205)
+* Require Explicit Destination is added to the Message Acceptance form.
+  (Closes #277)
 
 1.1.2
 =====
