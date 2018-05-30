@@ -17,6 +17,7 @@
 # Postorius.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import re
 from django import forms
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -33,6 +34,9 @@ ACTION_CHOICES = (
     ("accept", _("Accept immediately (bypass other rules)")),
     ("defer", _("Default processing")),
 )
+
+
+EMPTY_STRING = ''
 
 
 class ListNew(forms.Form):
@@ -239,13 +243,14 @@ class MessageAcceptanceForm(ListSettingsForm):
         label=_("Acceptable aliases"),
         required=False,
         help_text=_(
-            'Alias names which qualify as explicit to or cc destination names '
-            'for this list. Alternate addresses that are acceptable when '
-            '`require_explicit_destination\' is enabled. This option takes a '
-            'list of regular expressions, one per line, which is matched '
-            'against every recipient address in the message. The matching is '
-            'performed with Python\'s re.match() function, meaning they are '
-            'anchored to the start of the string.'))
+            'This is a list, one per line, of addresses and regexps matching '
+            'addresses that are acceptable in To: or Cc: in lieu of the list '
+            'posting address when `require_explicit_destination\' is enabled. '
+            ' Entries are either email addresses or regexps matching email '
+            'addresses.  Regexps are entries beginning with `^\' and are '
+            'matched against every recipient address in the message. The '
+            'matching is performed with Python\'s re.match() function, meaning'
+            ' they are anchored to the start of the string.'))
     administrivia = forms.BooleanField(
         widget=forms.RadioSelect(choices=((True, _('Yes')), (False, _('No')))),
         required=False,
@@ -296,6 +301,29 @@ class MessageAcceptanceForm(ListSettingsForm):
             'The maximum allowed message size. '
             'This can be used to prevent emails with large attachments. '
             'A size of 0 disables the check.'))
+
+    def clean_acceptable_aliases(self):
+        # python's urlencode will drop this attribute completely if an empty
+        # list is passed with doseq=True. To make it work for us, we instead
+        # use an empty string to signify an empty value. In turn, Core will
+        # also consider an empty value to be empty list for list-of-strings
+        # field.
+        if not self.cleaned_data['acceptable_aliases']:
+            return EMPTY_STRING
+        for alias in self.cleaned_data['acceptable_aliases']:
+            if alias.startswith('^'):
+                try:
+                    re.compile(alias)
+                except re.error as e:
+                    raise forms.ValidationError(
+                        _('Invalid alias regexp: {}: {}').format(alias, e.msg))
+            else:
+                try:
+                    validate_email(alias)
+                except ValidationError:
+                    raise forms.ValidationError(
+                        _('Invalid alias email: {}').format(alias))
+        return self.cleaned_data['acceptable_aliases']
 
 
 class DigestSettingsForm(ListSettingsForm):

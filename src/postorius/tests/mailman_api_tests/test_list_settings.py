@@ -131,11 +131,11 @@ class ListSettingsTest(ViewTestCase):
         self.assertEqual(response.status_code, 200)
         form = response.context["form"]
         self.assertEqual(
-            form.initial['first_strip_reply_to'], 'False')
+            form.initial['first_strip_reply_to'], False)
         post_data = dict(
-            (key, str(self.foo_list.settings[key]))
+            (key, self.foo_list.settings[key])
             for key in form.fields)
-        post_data['first_strip_reply_to'] = 'True'
+        post_data['first_strip_reply_to'] = True
         response = self.client.post(url, post_data)
         self.assertRedirects(response, url)
         self.assertHasSuccessMessage(response)

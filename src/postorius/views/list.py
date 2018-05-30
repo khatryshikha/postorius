@@ -730,8 +730,7 @@ def list_settings(request, list_id=None, visible_section=None,
         raise Http404('No such settings section')
     m_list = List.objects.get_or_404(fqdn_listname=list_id)
     list_settings = m_list.settings
-    initial_data = dict(
-        (key, str(value)) for key, value in list(list_settings.items()))
+    initial_data = dict((key, value) for key, value in list_settings.items())
     # List settings are grouped an processed in different forms.
     if request.method == 'POST':
         form = form_class(request.POST, mlist=m_list, initial=initial_data)
@@ -745,7 +744,9 @@ def list_settings(request, list_id=None, visible_section=None,
                 list_settings.save()
                 messages.success(request, _('The settings have been updated.'))
             except HTTPError as e:
-                messages.error(request, _('An error occured: %s') % e.reason)
+                messages.error(
+                    request,
+                    _('An error occured: ') + e.reason.decode('utf-8'))
             return redirect('list_settings', m_list.list_id, visible_section)
     else:
         form = form_class(initial=initial_data, mlist=m_list)
