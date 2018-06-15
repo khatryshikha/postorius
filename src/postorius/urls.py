@@ -19,10 +19,11 @@
 
 from django.conf.urls import url, include
 
-from postorius.views import list as list_views
-from postorius.views import user as user_views
 from postorius.views import domain as domain_views
+from postorius.views import list as list_views
 from postorius.views import rest as rest_views
+from postorius.views import system as system_views
+from postorius.views import user as user_views
 
 
 list_patterns = [
@@ -96,6 +97,10 @@ urlpatterns = [
     url(r'^lists/$', list_views.list_index, name='list_index'),
     url(r'^lists/new/$', list_views.list_new, name='list_new'),
     url(r'^lists/(?P<list_id>[^/]+)/', include(list_patterns)),
+
+    url(r'^system/$', system_views.system_information,
+        name='system_information'),
+
     url(r'^api/list/(?P<list_id>[^/]+)/held_message/(?P<held_id>\d+)/$',
         rest_views.get_held_message, name='rest_held_message'),
     url(r'^api/list/(?P<list_id>[^/]+)/held_message/(?P<held_id>\d+)/'
