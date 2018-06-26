@@ -44,6 +44,12 @@
                             <span class="glyphicon glyphicon-globe"></span>
                             {% trans 'Domains' %}
                         </a></li>
+                        <li>
+                            <a href="{% url 'system_information' %}">
+                                <span class="glyphicon glyphicon-list-alt"></span>
+                                {% trans 'System Information' %}
+                            </a>
+                        </li>
                     {% endif %}
                     {% if 'hyperkitty' in INSTALLED_APPS %}
                         <li><a href="{% url 'hk_root' %}">
