@@ -18,6 +18,7 @@
 
 """Postorius view decorators."""
 
+
 from django.core.exceptions import PermissionDenied
 
 from postorius.auth.utils import set_list_access_props

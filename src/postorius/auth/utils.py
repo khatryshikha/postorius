@@ -39,8 +39,9 @@ def user_is_in_list_roster(user, mailing_list, roster):
         return False
     addresses = set(EmailAddress.objects.filter(
         user=user, verified=True).values_list("email", flat=True))
-    roster_addresses = set([member.email for member in
-                            set(getattr(mailing_list, roster))])
+    roster_addresses = set(
+        [member.email for member in getattr(mailing_list, roster)]
+    )
     if addresses & roster_addresses:
         return True  # At least one address is in the roster
     return False
@@ -69,8 +70,8 @@ def set_domain_access_props(user, domain):
 
     :param user: The user to check permissions for.
     :type user: django.contrib.auth.model.User
-    :param mlist: Domain to check permissions for.
-    :type mlist: postorius.models.Domain
+    :param domain: Domain to check permissions for.
+    :type domain: postorius.models.Domain
     """
     # TODO: This is very slow as it involves first iterating over every domain
     # owner and then each of their addresses. Create an API in Core to
