@@ -34,9 +34,7 @@ class ListOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
         if user.is_superuser:
             return True
         set_list_access_props(user, mlist_id)
-        if user.is_list_owner:
-            return True
-        return False
+        return user.is_list_owner
 
 
 class ListModeratorMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -50,9 +48,7 @@ class ListModeratorMixin(LoginRequiredMixin, UserPassesTestMixin):
         if user.is_superuser:
             return True
         set_list_access_props(user, mlist_id)
-        if user.is_list_owner or user.is_list_moderator:
-            return True
-        return False
+        return user.is_list_owner or user.is_list_moderator
 
 
 class DomainOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -66,15 +62,11 @@ class DomainOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
         if user.is_superuser:
             return True
         set_domain_access_props(user, domain)
-        if user.is_domain_owner:
-            return True
-        return False
+        return user.is_domain_owner
 
 
 class SuperUserRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
     """Mixin to allow access to only Django Superusers."""
 
     def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        return False
+        return self.request.user.is_superuser

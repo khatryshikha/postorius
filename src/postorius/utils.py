@@ -19,8 +19,10 @@
 
 import logging
 
+from django.conf import settings
 from django.shortcuts import render
 from django.utils.translation import gettext as _
+from mailmanclient import Client
 
 
 logger = logging.getLogger(__name__)
@@ -31,6 +33,15 @@ def render_api_error(request):
     Use if MailmanApiError is catched.
     """
     return render(request, 'postorius/errors/generic.html',
-                  {'error': _('Mailman REST API not available. '
-                              'Please start Mailman core.')},
+                  {'error': _('Mailman REST API not available. Please start Mailman core.')},   # noqa: E501
                   status=503)
+
+
+def get_mailman_client():
+    # easier to patch during unit tests
+    client = Client(
+        '%s/3.1' %
+        settings.MAILMAN_REST_API_URL,
+        settings.MAILMAN_REST_API_USER,
+        settings.MAILMAN_REST_API_PASS)
+    return client
