@@ -37,6 +37,7 @@ class MailmanUserTest(ViewTestCase):
         super(MailmanUserTest, self).setUp()
         self.domain = self.mm_client.create_domain('example.com')
         self.foo_list = self.domain.create_list('foo')
+        self.foo_list.send_welcome_message = False
         self.user = User.objects.create_user(
             'user', 'user@example.com', 'testpass')
         EmailAddress.objects.create(

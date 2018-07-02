@@ -56,7 +56,7 @@ interactions:
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
-    body: list_id=foo.example.com&role=owner&subscriber=owner%40example.com
+    body: display_name=None&list_id=foo.example.com&role=owner&subscriber=owner%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -67,10 +67,10 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/85']
+      location: ['http://localhost:9001/3.0/members/663']
     status: {code: 201, message: Created}
 - request:
-    body: list_id=foo.example.com&role=moderator&subscriber=moderator%40example.com
+    body: display_name=None&list_id=foo.example.com&role=moderator&subscriber=moderator%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -81,7 +81,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/86']
+      location: ['http://localhost:9001/3.0/members/664']
     status: {code: 201, message: Created}
 - request:
     body: email=test%40example.com
@@ -95,20 +95,20 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/users/90']
+      location: ['http://localhost:9001/3.0/users/870']
     status: {code: 201, message: Created}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/users/90
+    uri: http://localhost:9001/3.0/users/870
   response:
-    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"16489e1f61f8040db56255d551372f32444d41c8\"",
-        "is_server_owner": false, "password": "$6$rounds=656000$QbIjLG5IvaJagiFl$k0QjLv.XYzoJgXgGYm3hpVt/aWAFdXlmu/mMA2zE4hkt3uNo09wTRi/QljPSZUpnUSuqtp0BcgM3F07RYD4n91",
-        "self_link": "http://localhost:9001/3.0/users/90", "user_id": 90}'}
+    body: {string: '{"created_on": "2005-08-01T07:49:23", "http_etag": "\"54f3e9c888fb78743e9f5b8d55103f3f206afddd\"",
+        "is_server_owner": false, "password": "$6$rounds=656000$G7p6zGxeLTTeYjPz$WWT97dq.1v7MTEgV3T95e0Pp1zV9HUyBmJDxEnGZyouzXciM2rwWxW.OMbAzbZZDivmavwzdcQrfOxnBLtIh00",
+        "self_link": "http://localhost:9001/3.0/users/870", "user_id": 870}'}
     headers:
-      content-length: ['326']
+      content-length: ['328']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -116,15 +116,15 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/users/90/addresses
+    uri: http://localhost:9001/3.0/users/870/addresses
   response:
-    body: {string: '{"entries": [{"email": "test@example.com", "http_etag": "\"6dfac99c9d645aa968f16e0f939af17a87294175\"",
+    body: {string: '{"entries": [{"email": "test@example.com", "http_etag": "\"b9fc8d9ade9f49a6581c39f52d42c3fde104f399\"",
         "original_email": "test@example.com", "registered_on": "2005-08-01T07:49:23",
         "self_link": "http://localhost:9001/3.0/addresses/test@example.com", "user":
-        "http://localhost:9001/3.0/users/90"}], "http_etag": "\"ddbbc355358c643cc536ed7be783d49c33a061c6\"",
+        "http://localhost:9001/3.0/users/870"}], "http_etag": "\"b9cbf5e6fb10c361cd918bee1497dc46df532483\"",
         "start": 0, "total_size": 1}'}
     headers:
-      content-length: ['388']
+      content-length: ['389']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -150,7 +150,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/87']
+      location: ['http://localhost:9001/3.0/members/665']
     status: {code: 201, message: Created}
 - request:
     body: null
@@ -186,18 +186,19 @@ interactions:
     method: GET
     uri: http://localhost:9001/3.0/users
   response:
-    body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "http_etag":
-        "\"c51cd9a7c8d836e852c3c5a23790abc68066e71f\"", "is_server_owner": false,
-        "self_link": "http://localhost:9001/3.0/users/88", "user_id": 88}, {"created_on":
-        "2005-08-01T07:49:23", "http_etag": "\"8286cc98937375102d07528f8b097f299b24d85e\"",
-        "is_server_owner": false, "self_link": "http://localhost:9001/3.0/users/89",
-        "user_id": 89}, {"created_on": "2005-08-01T07:49:23", "http_etag": "\"16489e1f61f8040db56255d551372f32444d41c8\"",
-        "is_server_owner": false, "password": "$6$rounds=656000$QbIjLG5IvaJagiFl$k0QjLv.XYzoJgXgGYm3hpVt/aWAFdXlmu/mMA2zE4hkt3uNo09wTRi/QljPSZUpnUSuqtp0BcgM3F07RYD4n91",
-        "self_link": "http://localhost:9001/3.0/users/90", "user_id": 90}], "http_etag":
-        "\"3cd8c78b5a5409ce48106c935e9ea914e5fef55f\"", "start": 0, "total_size":
+    body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "display_name":
+        "None", "http_etag": "\"6c77de01ecba906f94878d831e2d3b10589f1ec4\"", "is_server_owner":
+        false, "self_link": "http://localhost:9001/3.0/users/868", "user_id": 868},
+        {"created_on": "2005-08-01T07:49:23", "display_name": "None", "http_etag":
+        "\"f1d1266e67c9e93f891486eb45ed7089c429f188\"", "is_server_owner": false,
+        "self_link": "http://localhost:9001/3.0/users/869", "user_id": 869}, {"created_on":
+        "2005-08-01T07:49:23", "http_etag": "\"54f3e9c888fb78743e9f5b8d55103f3f206afddd\"",
+        "is_server_owner": false, "password": "$6$rounds=656000$G7p6zGxeLTTeYjPz$WWT97dq.1v7MTEgV3T95e0Pp1zV9HUyBmJDxEnGZyouzXciM2rwWxW.OMbAzbZZDivmavwzdcQrfOxnBLtIh00",
+        "self_link": "http://localhost:9001/3.0/users/870", "user_id": 870}], "http_etag":
+        "\"c7645a01e5a12ee30bf9d711ff765f08caaa91a5\"", "start": 0, "total_size":
         3}'}
     headers:
-      content-length: ['815']
+      content-length: ['869']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -205,7 +206,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/88
+    uri: http://localhost:9001/3.0/users/868
   response:
     body: {string: ''}
     headers:
@@ -216,7 +217,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/89
+    uri: http://localhost:9001/3.0/users/869
   response:
     body: {string: ''}
     headers:
@@ -227,7 +228,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/90
+    uri: http://localhost:9001/3.0/users/870
   response:
     body: {string: ''}
     headers:
