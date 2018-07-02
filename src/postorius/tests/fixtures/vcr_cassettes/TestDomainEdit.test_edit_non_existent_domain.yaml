@@ -18,7 +18,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/domains/random.com
+    uri: http://localhost:9001/3.1/domains/random.com
   response:
     body: {string: 404 Not Found}
     headers:

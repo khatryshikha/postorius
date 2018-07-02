@@ -20,6 +20,7 @@ from allauth.account.models import EmailAddress
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
+
 from postorius.forms import DomainForm
 
 

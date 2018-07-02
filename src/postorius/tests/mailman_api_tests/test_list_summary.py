@@ -96,7 +96,7 @@ class ListSummaryPageTest(ViewTestCase):
         self.client.login(username='testuser', password='testpass')
         response = self.client.get(reverse('list_summary',
                                    args=('foo@example.com', )))
-        self.assertContains(response, 'Delete list</a>')
+        self.assertContains(response, 'Delete</a>')
 
     def test_list_summary_moderator(self):
         # Response must contain the administration menu
@@ -107,7 +107,7 @@ class ListSummaryPageTest(ViewTestCase):
         response = self.client.get(reverse('list_summary',
                                    args=('foo@example.com', )))
         self.assertContains(response, 'Held messages</a>')
-        self.assertNotContains(response, 'Delete list</a>')
+        self.assertNotContains(response, 'Delete</a>')
 
     def test_list_summary_is_admin_secondary_owner(self):
         # Response must contain the administration menu
@@ -121,7 +121,7 @@ class ListSummaryPageTest(ViewTestCase):
         self.client.login(username='testuser', password='testpass')
         response = self.client.get(reverse('list_summary',
                                    args=('foo@example.com', )))
-        self.assertContains(response, 'Delete list</a>')
+        self.assertContains(response, 'Delete</a>')
 
     def test_list_summary_is_admin_secondary_moderator(self):
         # Response must contain the administration menu
@@ -137,7 +137,7 @@ class ListSummaryPageTest(ViewTestCase):
                                    args=('foo@example.com', )))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Held messages</a>')
-        self.assertNotContains(response, 'Delete list</a>')
+        self.assertNotContains(response, 'Delete</a>')
 
     def test_metrics_not_displayed_to_anonymous(self):
         response = self.client.get(reverse('list_summary',

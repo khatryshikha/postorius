@@ -5,27 +5,28 @@ interactions:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
     method: POST
-    uri: http://localhost:9001/3.0/users
+    uri: http://localhost:9001/3.1/users
   response:
     body: {string: ''}
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/users/157']
+      location: ['http://localhost:9001/3.1/users/000000000000000000000000000003b2']
     status: {code: 201, message: Created}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/users/157
+    uri: http://localhost:9001/3.1/users/000000000000000000000000000003b2
   response:
     body: {string: '{"created_on": "2005-08-01T07:49:23", "display_name": "Bob", "http_etag":
-        "\"e6cb32535b353cb0b1ff05af51eee500a8e9ef82\"", "is_server_owner": false,
-        "password": "$6$rounds=656000$wcZ2g/mKzDpOE1TV$BM8aMU63dH9Qs0bbesQR3ybHaqIlG8g25HAvdoyoSM1/bVcRREOvK7F8.zTUfMaoqTAXKIVJ.q5HZl/BqGqqA0",
-        "self_link": "http://localhost:9001/3.0/users/157", "user_id": 157}'}
+        "\"8953359d984b3a0f07524d28ca75c161c1ab1fcc\"", "is_server_owner": false,
+        "password": "$6$rounds=656000$mViuO.xVCIe370wz$PcSx6Ps40fD2B4fDF702166n2V5iSONz8CDf94Ljh2VR1nBM4doTD0Rjattcr77eWg8yeM64zJiqY8S6CzZcG/",
+        "self_link": "http://localhost:9001/3.1/users/000000000000000000000000000003b2",
+        "user_id": "000000000000000000000000000003b2"}'}
     headers:
-      content-length: ['351']
+      content-length: ['411']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -33,15 +34,16 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/users/157/addresses
+    uri: http://localhost:9001/3.1/users/000000000000000000000000000003b2/addresses
   response:
     body: {string: '{"entries": [{"display_name": "Bob", "email": "bob@example.com",
-        "http_etag": "\"240cf30e4ac1d7f3d5306a329811e630e413a009\"", "original_email":
-        "bob@example.com", "registered_on": "2005-08-01T07:49:23", "self_link": "http://localhost:9001/3.0/addresses/bob@example.com",
-        "user": "http://localhost:9001/3.0/users/157"}], "http_etag": "\"a4c644eb68bdf3bbda2d9898deb163fad9e667c2\"",
-        "start": 0, "total_size": 1}'}
+        "http_etag": "\"601e962b313a16a6a72a8b206c6251b29f59795e\"", "original_email":
+        "bob@example.com", "registered_on": "2005-08-01T07:49:23", "self_link": "http://localhost:9001/3.1/addresses/bob@example.com",
+        "user": "http://localhost:9001/3.1/users/000000000000000000000000000003b2"}],
+        "http_etag": "\"b1acc59493aa29aa7e82a80eb9127a06fa6fa793\"", "start": 0, "total_size":
+        1}'}
     headers:
-      content-length: ['409']
+      content-length: ['438']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -65,10 +67,10 @@ interactions:
     uri: http://localhost:9001/3.0/users
   response:
     body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "display_name":
-        "Bob", "http_etag": "\"e6cb32535b353cb0b1ff05af51eee500a8e9ef82\"", "is_server_owner":
-        false, "password": "$6$rounds=656000$wcZ2g/mKzDpOE1TV$BM8aMU63dH9Qs0bbesQR3ybHaqIlG8g25HAvdoyoSM1/bVcRREOvK7F8.zTUfMaoqTAXKIVJ.q5HZl/BqGqqA0",
-        "self_link": "http://localhost:9001/3.0/users/157", "user_id": 157}], "http_etag":
-        "\"c2cfd04367864d015b366dcdb1fbf3de43c11719\"", "start": 0, "total_size":
+        "Bob", "http_etag": "\"e79eac70b23c8b73fe1fca843c512c626695e4b7\"", "is_server_owner":
+        false, "password": "$6$rounds=656000$mViuO.xVCIe370wz$PcSx6Ps40fD2B4fDF702166n2V5iSONz8CDf94Ljh2VR1nBM4doTD0Rjattcr77eWg8yeM64zJiqY8S6CzZcG/",
+        "self_link": "http://localhost:9001/3.0/users/946", "user_id": 946}], "http_etag":
+        "\"852f76413ac2a073431fb59f2f78a8972178dc18\"", "start": 0, "total_size":
         1}'}
     headers:
       content-length: ['456']
@@ -79,7 +81,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/157
+    uri: http://localhost:9001/3.0/users/946
   response:
     body: {string: ''}
     headers:

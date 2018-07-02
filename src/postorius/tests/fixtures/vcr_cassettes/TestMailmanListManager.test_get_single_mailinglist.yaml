@@ -100,12 +100,12 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/lists/baz@most-desirable.org
+    uri: http://localhost:9001/3.1/lists/baz@most-desirable.org
   response:
     body: {string: '{"display_name": "Baz", "fqdn_listname": "baz@most-desirable.org",
-        "http_etag": "\"b1ceaa3315c2205cefe86346e19c8eba493c3561\"", "list_id": "baz.most-desirable.org",
+        "http_etag": "\"f68ac7f2df6ae93b279465e91ace7d67f88b6b01\"", "list_id": "baz.most-desirable.org",
         "list_name": "baz", "mail_host": "most-desirable.org", "member_count": 0,
-        "self_link": "http://localhost:9001/3.0/lists/baz.most-desirable.org", "volume":
+        "self_link": "http://localhost:9001/3.1/lists/baz.most-desirable.org", "volume":
         1}'}
     headers:
       content-length: ['322']

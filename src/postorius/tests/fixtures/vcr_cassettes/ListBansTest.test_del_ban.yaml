@@ -87,12 +87,12 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com
+    uri: http://localhost:9001/3.1/lists/test_list.example.com
   response:
     body: {string: '{"display_name": "Test_list", "fqdn_listname": "test_list@example.com",
-        "http_etag": "\"3f02dac6cf71a3be179af5064b09ce668186e785\"", "list_id": "test_list.example.com",
+        "http_etag": "\"a6dde4108c94a1ebe915704389125879a6cde4a2\"", "list_id": "test_list.example.com",
         "list_name": "test_list", "mail_host": "example.com", "member_count": 0, "self_link":
-        "http://localhost:9001/3.0/lists/test_list.example.com", "volume": 1}'}
+        "http://localhost:9001/3.1/lists/test_list.example.com", "volume": 1}'}
     headers:
       content-length: ['324']
       content-type: [application/json; charset=UTF-8]
@@ -102,11 +102,11 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com/bans
+    uri: http://localhost:9001/3.1/lists/test_list.example.com/bans
   response:
-    body: {string: '{"entries": [{"email": "banned@example.com", "http_etag": "\"f97c7e71d9d67fe90f1f8d98429c3fa6a5c76f3d\"",
-        "list_id": "test_list.example.com", "self_link": "http://localhost:9001/3.0/lists/test_list.example.com/bans/banned@example.com"}],
-        "http_etag": "\"3f2107d752512a58b966f626957a8a21f2280abd\"", "start": 0, "total_size":
+    body: {string: '{"entries": [{"email": "banned@example.com", "http_etag": "\"7b8e5248da2dc22f32680110e9c7609ca5687eb5\"",
+        "list_id": "test_list.example.com", "self_link": "http://localhost:9001/3.1/lists/test_list.example.com/bans/banned@example.com"}],
+        "http_etag": "\"4101b9d1d3400c69109c99ec6e7f8aaa5b167154\"", "start": 0, "total_size":
         1}'}
     headers:
       content-length: ['327']
@@ -117,7 +117,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/lists/test_list.example.com/bans/banned@example.com
+    uri: http://localhost:9001/3.1/lists/test_list.example.com/bans/banned@example.com
   response:
     body: {string: ''}
     headers:
@@ -128,12 +128,12 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com
+    uri: http://localhost:9001/3.1/lists/test_list.example.com
   response:
     body: {string: '{"display_name": "Test_list", "fqdn_listname": "test_list@example.com",
-        "http_etag": "\"3f02dac6cf71a3be179af5064b09ce668186e785\"", "list_id": "test_list.example.com",
+        "http_etag": "\"a6dde4108c94a1ebe915704389125879a6cde4a2\"", "list_id": "test_list.example.com",
         "list_name": "test_list", "mail_host": "example.com", "member_count": 0, "self_link":
-        "http://localhost:9001/3.0/lists/test_list.example.com", "volume": 1}'}
+        "http://localhost:9001/3.1/lists/test_list.example.com", "volume": 1}'}
     headers:
       content-length: ['324']
       content-type: [application/json; charset=UTF-8]
@@ -143,7 +143,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com/bans
+    uri: http://localhost:9001/3.1/lists/test_list.example.com/bans
   response:
     body: {string: '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
         "start": 0, "total_size": 0}'}

@@ -19,11 +19,12 @@
 
 from django.conf.urls import url, include
 
+from postorius.views import user as user_views
 from postorius.views import domain as domain_views
 from postorius.views import list as list_views
 from postorius.views import rest as rest_views
 from postorius.views import system as system_views
-from postorius.views import user as user_views
+from postorius.views import template as template_views
 
 
 list_patterns = [
@@ -67,6 +68,18 @@ list_patterns = [
         name='list_settings'),
     url(r'^unsubscribe_all$', list_views.remove_all_subscribers,
         name='unsubscribe_all'),
+    url(r'^templates$',
+        template_views.ListTemplateIndexView.as_view(),
+        name='list_template_list'),
+    url(r'^templates/new$',
+        template_views.ListTemplateCreateView.as_view(),
+        name='list_template_new'),
+    url(r'^templates/(?P<pk>[^/]+)?/update$',
+        template_views.ListTemplateUpdateView.as_view(),
+        name='list_template_update'),
+    url(r'^templates/(?P<pk>[^/]+)?/delete$',
+        template_views.ListTemplateDeleteView.as_view(),
+        name='list_template_delete')
 ]
 
 urlpatterns = [
@@ -93,6 +106,22 @@ urlpatterns = [
         name='domain_edit'),
     url(r'^domains/(?P<domain>[^/]+)/delete$', domain_views.domain_delete,
         name='domain_delete'),
+    # Ideally, these paths should be accessible by domain_owners, however,
+    # we don't have good ways to check that, so for now, this views are
+    # protected by superuser privileges.
+    # I know it is bad, but this will be fixed soon. See postorius#
+    url(r'^domains/(?P<domain>[^/]+)/templates$',
+        template_views.DomainTemplateIndexView.as_view(),
+        name='domain_template_list'),
+    url(r'^domains/(?P<domain>[^/]+)/templates/new$',
+        template_views.DomainTemplateCreateView.as_view(),
+        name='domain_template_new'),
+    url(r'^domains/(?P<domain>[^/]+)/templates/(?P<pk>[^/]+)/update$',
+        template_views.DomainTemplateUpdateView.as_view(),
+        name='domain_template_update'),
+    url(r'^domains/(?P<domain>[^/]+)/templates/(?P<pk>[^/]+)/delete$',
+        template_views.DomainTemplateDeleteView.as_view(),
+        name='domain_template_delete'),
     # /lists/
     url(r'^lists/$', list_views.list_index, name='list_index'),
     url(r'^lists/new/$', list_views.list_new, name='list_new'),
@@ -107,4 +136,8 @@ urlpatterns = [
         'attachment/(?P<attachment_id>\d+)/$',
         rest_views.get_attachment_for_held_message,
         name='rest_attachment_for_held_message'),
+    # URL configuration for templates.
+    url(r'^api/templates/(?P<context>[^/]+)/(?P<identifier>[^/]+)/(?P<name>[^/]+)',  # noqa: E501
+        template_views.get_template_data,
+        name='rest_template'),
 ]

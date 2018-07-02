@@ -5,13 +5,13 @@ interactions:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
     method: POST
-    uri: http://localhost:9001/3.0/domains
+    uri: http://localhost:9001/3.1/domains
   response:
     body: {string: ''}
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/domains/example.com']
+      location: ['http://localhost:9001/3.1/domains/example.com']
     status: {code: 201, message: Created}
 - request:
     body: description=A+new+Domain.&mail_host=example.com&owner=su%40example.com
@@ -19,7 +19,7 @@ interactions:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
     method: POST
-    uri: http://localhost:9001/3.0/domains
+    uri: http://localhost:9001/3.1/domains
   response:
     body: {string: 'Duplicate email host: example.com'}
     headers:
@@ -61,12 +61,12 @@ interactions:
     uri: http://localhost:9001/3.0/users
   response:
     body: {string: '{"entries": [{"created_on": "2005-08-01T07:49:23", "http_etag":
-        "\"0c3f6e8712fd05b9da49c42bf9600a5414b7958f\"", "is_server_owner": false,
-        "self_link": "http://localhost:9001/3.0/users/25", "user_id": 25}], "http_etag":
-        "\"348e2549d7cb4eb7f86ecd8a5bf61142377beffa\"", "start": 0, "total_size":
+        "\"216e58b656c473e486de059b63fcd9394777d53d\"", "is_server_owner": false,
+        "self_link": "http://localhost:9001/3.0/users/805", "user_id": 805}], "http_etag":
+        "\"7df6dde16d9f7121145343c5719c21653e3ca7ca\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['295']
+      content-length: ['297']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -74,7 +74,7 @@ interactions:
     headers:
       accept-encoding: ['gzip, deflate']
     method: DELETE
-    uri: http://localhost:9001/3.0/users/25
+    uri: http://localhost:9001/3.0/users/805
   response:
     body: {string: ''}
     headers:

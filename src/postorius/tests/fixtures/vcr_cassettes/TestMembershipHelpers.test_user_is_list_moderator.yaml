@@ -56,7 +56,7 @@ interactions:
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
-    body: list_id=test_list.example.com&role=owner&subscriber=owner%40example.com
+    body: display_name=None&list_id=test_list.example.com&role=owner&subscriber=owner%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -67,10 +67,10 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/179']
+      location: ['http://localhost:9001/3.0/members/783']
     status: {code: 201, message: Created}
 - request:
-    body: list_id=test_list.example.com&role=moderator&subscriber=moderator%40example.com
+    body: display_name=None&list_id=test_list.example.com&role=moderator&subscriber=moderator%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -81,7 +81,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/180']
+      location: ['http://localhost:9001/3.0/members/784']
     status: {code: 201, message: Created}
 - request:
     body: null
@@ -91,14 +91,14 @@ interactions:
     uri: http://localhost:9001/3.0/lists/test_list.example.com/roster/moderator
   response:
     body: {string: '{"entries": [{"address": "http://localhost:9001/3.0/addresses/moderator@example.com",
-        "delivery_mode": "regular", "email": "moderator@example.com", "http_etag":
-        "\"a9cbd92d91cc6f85ef53549fb20cfae2cf9906ce\"", "list_id": "test_list.example.com",
-        "member_id": 180, "moderation_action": "accept", "role": "moderator", "self_link":
-        "http://localhost:9001/3.0/members/180", "user": "http://localhost:9001/3.0/users/187"}],
-        "http_etag": "\"c844d6928028976c0268552b901af663c654e31b\"", "start": 0, "total_size":
+        "delivery_mode": "regular", "display_name": "None", "email": "moderator@example.com",
+        "http_etag": "\"c20ded9bfc88981b4949789675e5d417a0bf5966\"", "list_id": "test_list.example.com",
+        "member_id": 784, "moderation_action": "accept", "role": "moderator", "self_link":
+        "http://localhost:9001/3.0/members/784", "user": "http://localhost:9001/3.0/users/1005"}],
+        "http_etag": "\"f5d32eb926a3a002c290c06a3b4d07b9f7705d21\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['507']
+      content-length: ['532']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -109,14 +109,14 @@ interactions:
     uri: http://localhost:9001/3.0/lists/test_list.example.com/roster/moderator
   response:
     body: {string: '{"entries": [{"address": "http://localhost:9001/3.0/addresses/moderator@example.com",
-        "delivery_mode": "regular", "email": "moderator@example.com", "http_etag":
-        "\"a9cbd92d91cc6f85ef53549fb20cfae2cf9906ce\"", "list_id": "test_list.example.com",
-        "member_id": 180, "moderation_action": "accept", "role": "moderator", "self_link":
-        "http://localhost:9001/3.0/members/180", "user": "http://localhost:9001/3.0/users/187"}],
-        "http_etag": "\"c844d6928028976c0268552b901af663c654e31b\"", "start": 0, "total_size":
+        "delivery_mode": "regular", "display_name": "None", "email": "moderator@example.com",
+        "http_etag": "\"c20ded9bfc88981b4949789675e5d417a0bf5966\"", "list_id": "test_list.example.com",
+        "member_id": 784, "moderation_action": "accept", "role": "moderator", "self_link":
+        "http://localhost:9001/3.0/members/784", "user": "http://localhost:9001/3.0/users/1005"}],
+        "http_etag": "\"f5d32eb926a3a002c290c06a3b4d07b9f7705d21\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['507']
+      content-length: ['532']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
@@ -127,18 +127,18 @@ interactions:
     uri: http://localhost:9001/3.0/lists/test_list.example.com/roster/moderator
   response:
     body: {string: '{"entries": [{"address": "http://localhost:9001/3.0/addresses/moderator@example.com",
-        "delivery_mode": "regular", "email": "moderator@example.com", "http_etag":
-        "\"a9cbd92d91cc6f85ef53549fb20cfae2cf9906ce\"", "list_id": "test_list.example.com",
-        "member_id": 180, "moderation_action": "accept", "role": "moderator", "self_link":
-        "http://localhost:9001/3.0/members/180", "user": "http://localhost:9001/3.0/users/187"}],
-        "http_etag": "\"c844d6928028976c0268552b901af663c654e31b\"", "start": 0, "total_size":
+        "delivery_mode": "regular", "display_name": "None", "email": "moderator@example.com",
+        "http_etag": "\"c20ded9bfc88981b4949789675e5d417a0bf5966\"", "list_id": "test_list.example.com",
+        "member_id": 784, "moderation_action": "accept", "role": "moderator", "self_link":
+        "http://localhost:9001/3.0/members/784", "user": "http://localhost:9001/3.0/users/1005"}],
+        "http_etag": "\"f5d32eb926a3a002c290c06a3b4d07b9f7705d21\"", "start": 0, "total_size":
         1}'}
     headers:
-      content-length: ['507']
+      content-length: ['532']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
-    body: list_id=test_list.example.com&role=moderator&subscriber=test_user%40example.com
+    body: display_name=None&list_id=test_list.example.com&role=moderator&subscriber=test_user%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
       content-type: [application/x-www-form-urlencoded]
@@ -149,7 +149,7 @@ interactions:
     headers:
       content-length: ['0']
       content-type: [application/json; charset=UTF-8]
-      location: ['http://localhost:9001/3.0/members/181']
+      location: ['http://localhost:9001/3.0/members/785']
     status: {code: 201, message: Created}
 - request:
     body: null
@@ -159,18 +159,19 @@ interactions:
     uri: http://localhost:9001/3.0/lists/test_list.example.com/roster/moderator
   response:
     body: {string: '{"entries": [{"address": "http://localhost:9001/3.0/addresses/moderator@example.com",
-        "delivery_mode": "regular", "email": "moderator@example.com", "http_etag":
-        "\"a9cbd92d91cc6f85ef53549fb20cfae2cf9906ce\"", "list_id": "test_list.example.com",
-        "member_id": 180, "moderation_action": "accept", "role": "moderator", "self_link":
-        "http://localhost:9001/3.0/members/180", "user": "http://localhost:9001/3.0/users/187"},
+        "delivery_mode": "regular", "display_name": "None", "email": "moderator@example.com",
+        "http_etag": "\"c20ded9bfc88981b4949789675e5d417a0bf5966\"", "list_id": "test_list.example.com",
+        "member_id": 784, "moderation_action": "accept", "role": "moderator", "self_link":
+        "http://localhost:9001/3.0/members/784", "user": "http://localhost:9001/3.0/users/1005"},
         {"address": "http://localhost:9001/3.0/addresses/test_user@example.com", "delivery_mode":
-        "regular", "email": "test_user@example.com", "http_etag": "\"35d8fa7811aacee65aca1231783dbc757731ee80\"",
-        "list_id": "test_list.example.com", "member_id": 181, "moderation_action":
-        "accept", "role": "moderator", "self_link": "http://localhost:9001/3.0/members/181",
-        "user": "http://localhost:9001/3.0/users/188"}], "http_etag": "\"57a8d5be436ed4cda687ae18ec61311d0936285e\"",
-        "start": 0, "total_size": 2}'}
+        "regular", "display_name": "None", "email": "test_user@example.com", "http_etag":
+        "\"ddf07c5b2ec67d8db2478e18b162ec2fee3c0d25\"", "list_id": "test_list.example.com",
+        "member_id": 785, "moderation_action": "accept", "role": "moderator", "self_link":
+        "http://localhost:9001/3.0/members/785", "user": "http://localhost:9001/3.0/users/1006"}],
+        "http_etag": "\"333e1542a7cde94840986084cfe0500ab48bf2d5\"", "start": 0, "total_size":
+        2}'}
     headers:
-      content-length: ['911']
+      content-length: ['961']
       content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
