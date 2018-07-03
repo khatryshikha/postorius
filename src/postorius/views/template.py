@@ -22,7 +22,7 @@ from django.db import IntegrityError
 from django.http import Http404, HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_safe
 from django.views.generic import (
     CreateView, UpdateView, ListView, DeleteView)
 
@@ -173,7 +173,7 @@ class DomainTemplateDeleteView(
                             args=(self.kwargs['domain'],))
 
 
-@require_GET
+@require_safe
 def get_template_data(request, context, identifier, name):
     # At this point, the request should be authenticated and it's method should
     # be GET. We just need to find the correct template and return it's
