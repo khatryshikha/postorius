@@ -186,9 +186,9 @@ def get_template_data(request, context, identifier, name):
     try:
         template = EmailTemplate.objects.get(**data)
     except EmailTemplate.DoesNotExist:
-        return Http404('Template is not defined.')
+        raise Http404('Template is not defined.')
     except MultipleObjectsReturned:
-        return HttpResponseBadRequest('Multiple Templates exist')
+        raise HttpResponseBadRequest('Multiple Templates exist')
 
     return HttpResponse(template.data,
                         content_type='text/plain')
