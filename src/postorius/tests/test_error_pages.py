@@ -51,3 +51,11 @@ class TestUtils(TestCase):
             '<h1>Forbidden</h1>' in str(response.content))
         self.assertTrue(
             '<div class="alert alert-danger">' in str(response.content))
+
+    def test_500_page(self):
+        su = User.objects.create_superuser(
+            'su', 'test@example.com', 'testpass')
+        self.client.force_login(su)
+        response = self.client.get('/500', follow=True)
+        self.assertEqual(response.status_code, 500)
+        self.assertTrue(b'<h1>Server error</h1>' in response.content)
