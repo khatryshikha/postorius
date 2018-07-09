@@ -32,8 +32,29 @@ along with Postorius. If not, see <http://www.gnu.org/licenses/>.
 * Account subscription page now lists all the memberships with their respective
   roles. This avoids repeated API calls for the way data was displayed
   before.  (Closes #205)
+* Postorius now supports only Django 1.11+.
+* Duplicate MailingList names doesn't return a 500 error page and instead adds
+  an error to the New MailingList  form. (Fixes #237)
+* Pending subscription requests page is now paginated. (See !298)
+* Add owners/moderators form now allows specifying a Display Name, along with
+  their email. (Fixes #254)
+* Members views now show total number of members at the top. (See !315)
+* Fixed a bug where GET on views that only expect a POST would cause 500 server
+  errors instead of 405 method not allowed. (Fixes #185)
+* Member preferences form can now be saved without having to change all the
+  fields. (Fixes #178)
+* Fixed a bug where the 'Delete' button to remove list owners didn't work due to
+  wrong URL being rendered in the templates. (Fixes #274)
 * Require Explicit Destination is added to the Message Acceptance form.
   (Closes #277)
+* Delete Domain page now shows some extra warning information about all the
+  mailing lists that would be deleted after deleting the Domain. (See !250)
+* Superusers can now view Mailman Core's current version and REST API version
+  being used under 'System Information' menu in the top navigation bar. (See !325)
+* Fixed a bug where 500 error template wouldn't render properly due to missing
+  context variables in views that render that templates (See !334)
+* Postorius now allows adding and editing templates for email headers, footers
+  and some of the automatic responses sent out by Mailman. (See !327)
 
 1.1.2
 =====
