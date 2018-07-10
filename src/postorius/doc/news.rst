@@ -2,8 +2,6 @@
 News / Changelog
 ================
 
-Copyright (C) 2012-2015 by the Free Software Foundation, Inc.
-
 The Postorius Django app provides a web user interface to
 access GNU Mailman.
 
@@ -18,6 +16,81 @@ General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License
 along with Postorius. If not, see <http://www.gnu.org/licenses/>.
+
+
+1.2
+===
+(XXXX-XX-XX)
+* Postorius now runs only on Python 3.4+ and supports Django 1.8 and 1.11+
+* Added the ability to set and edit ``alias_domain`` to the ``domains`` forms.
+* List Create form now allows selecting the ``style``. A ``style`` is how a new
+  mailing list is configured.
+* Minimum supported Mailman Core version is now 3.2.0. This is because the
+  ``styles`` attribute for MailingList resource is exposed in 3.2, which
+  contains all the default ``styles`` supported by Core and their human readable
+  description.
+* Account subscription page now lists all the memberships with their respective
+  roles. This avoids repeated API calls for the way data was displayed
+  before.  (Closes #205)
+* Postorius now supports only Django 1.11+.
+* Duplicate MailingList names doesn't return a 500 error page and instead adds
+  an error to the New MailingList  form. (Fixes #237)
+* Pending subscription requests page is now paginated. (See !298)
+* Add owners/moderators form now allows specifying a Display Name, along with
+  their email. (Fixes #254)
+* Members views now show total number of members at the top. (See !315)
+* Fixed a bug where GET on views that only expect a POST would cause 500 server
+  errors instead of 405 method not allowed. (Fixes #185)
+* Member preferences form can now be saved without having to change all the
+  fields. (Fixes #178)
+* Fixed a bug where the 'Delete' button to remove list owners didn't work due to
+  wrong URL being rendered in the templates. (Fixes #274)
+* Require Explicit Destination is added to the Message Acceptance form.
+  (Closes #277)
+* Delete Domain page now shows some extra warning information about all the
+  mailing lists that would be deleted after deleting the Domain. (See !250)
+* Superusers can now view Mailman Core's current version and REST API version
+  being used under 'System Information' menu in the top navigation bar. (See !325)
+* Fixed a bug where 500 error template wouldn't render properly due to missing
+  context variables in views that render that templates (See !334)
+* Postorius now allows adding and editing templates for email headers, footers
+  and some of the automatic responses sent out by Mailman. (See !327)
+
+1.1.2
+=====
+(2017-12-27)
+
+* Added a new ``reset_passwords`` command that resets _all_ user's passwords
+  inside of Core. This password is different from the one Postorius
+  maintains. The Postorius password is the one used for logging users in.
+* Postorius now sets the 'Display Name' of the user in Core correctly. This
+  fixes a security vulnerability where user's display_name would be set as their
+  Core's password.
+=======
+
+1.1.1
+=====
+(2017-11-17)
+
+* Improved testing and internal bug fixes.
+* Preserve formatting of Mailing List description in the summary view.
+* Site's Name isn't capitalized anymore in the navigation bar.
+* html5shiv and response.js libraries are now included, instead of loading from a CDN.
+
+1.1.0 -- "Welcome to This World"
+================================
+(2017-05-26)
+
+* Added DMARC mitigation settings
+* Switch to Allauth auth library
+* Preference page improvements
+* Moderation page improvements
+* Django support up to Django 1.11
+* Added form to edit header matches
+* Domain edit form improvements
+* All pipelines recognized in alter messages form
+* Use django-mailman3 to share common code with HyperKitty
+* Various bug fixes, code cleanup, and performance improvements
 
 
 1.0.3

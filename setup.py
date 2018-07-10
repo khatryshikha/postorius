@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2016 by the Free Software Foundation, Inc.
+# Copyright (C) 2012-2018 by the Free Software Foundation, Inc.
 #
 # This file is part of Postorius.
 #
@@ -15,28 +15,49 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Postorius.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
+import sys
 from setuptools import setup, find_packages
+
+# Calculate the version number without importing the postorius package.
+with open('src/postorius/__init__.py') as fp:
+    for line in fp:
+        mo = re.match("__version__ = '(?P<version>[^']+?)'", line)
+        if mo:
+            __version__ = mo.group('version')
+            break
+    else:
+        print('No version number found')
+        sys.exit(1)
 
 
 setup(
     name="postorius",
-    version='1.0.2',
+    version=__version__,
     description="A web user interface for GNU Mailman",
     long_description=open('README.rst').read(),
     maintainer="The Mailman GSOC Coders",
     license='GPLv3',
     keywords='email mailman django',
-    url="https://launchpad.net/postorius",
+    url=" https://gitlab.com/mailman/postorius",
     classifiers=[
-        "Programming Language :: Python",
-        ],
+        "Framework :: Django",
+        "Development Status :: 4 - Beta",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Topic :: Communications :: Email :: Mailing List Servers",
+        "Programming Language :: Python :: 3",
+    ],
     packages=find_packages('src'),
     package_dir={'': 'src'},
     include_package_data=True,
     install_requires=[
-        'Django>=1.8',
-        'Django<1.10',
-        'django-browserid',
-        'mailmanclient',
+        'Django>=1.11',
+        'django-mailman3>=1.2.0a1',
+        'mailmanclient>=3.2.0b2'
+    ],
+    tests_require=[
+        "mock",
+        "vcrpy",
+        "beautifulsoup4",
     ],
 )
