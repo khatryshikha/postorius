@@ -1,75 +1,83 @@
+Systers Postorius
+------------------
+
 .. image:: https://travis-ci.org/systers/postorius.svg?branch=develop
     :target: https://travis-ci.org/systers/postorius
-
-===================================
-Postorius - web ui for GNU Mailman
-===================================
-.. image:: https://gitlab.com/mailman/postorius/badges/master/build.svg
-    :target: https://gitlab.com/mailman/postorius/commits/master
-
-.. image:: https://readthedocs.org/projects/postorius/badge
-    :target: https://postorius.readthedocs.io
-
-.. image:: https://gitlab.com/mailman/postorius/badges/master/coverage.svg?job=coverage
-    :target: https://mailman.gitlab.io/postorius
-
-.. image:: http://img.shields.io/pypi/v/postorius.svg
-    :target: https://pypi.python.org/pypi/postorius
-
-.. image:: http://img.shields.io/pypi/dm/postorius.svg
-    :target: https://pypi.python.org/pypi/postorius
-
-Copyright (C) 1998-2017 by the Free Software Foundation, Inc.
-
-The Postorius Django app provides a web user interface to
-access GNU Mailman.
-
-Postorius is free software: you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public License as
-published by the Free Software Foundation, version 3 of the License.
-
-Postorius is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
-General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with mailman.client. If not, see <http://www.gnu.org/licenses/>.
+.. image:: https://coveralls.io/repos/github/systers/posotrius/badge.svg?branch=develop
+   :target: https://coveralls.io/github/systers/postorius?branch=develop
 
 
-Requirements
-============
 
-Postorius requires Python 2.7 or newer and mailmanclient,
-the official Python bindings for GNU Mailman.
-The minimum Django version is 1.8.
-Postorius needs a running version of GNU Mailman version 3.
+Systers Postorius is a Systers version of `mailman3 web interface Postorius <https://gitlab.com/mailman/postorius>`_
 
+This repository is originally a clone of mailman's Postorius, it important to check the `LEGACY README <https://github.com/systers/postorius/blob/develop/LEGACY_README.rst>`_ which contains general setup of Postorius project.
 
-NEWS/Changelog
-==============
-
-News and the changelog can be found in the package documentation:
-
-src/postorius/doc/news.rst
+This project is constantly changing on original repo so the live documentation maintained by the mailman3 Postorius may become confusing to use for this repository. Hence we maintain basic setup instructions here although it is advised to read the `LEGACY README <https://github.com/systers/postorius/blob/develop/LEGACY_README.rst>`_ first, We are always trying to keep this repo in synchrony with the latest updates.
 
 
-Installation
-============
+Installation Setup
+------------------
 
-To install GNU Mailman follow the instructions in the documentation:
-http://mailman.readthedocs.org/
-
-A description how to run Postorius on Django's dev server or deploying it 
-using Apache/mod_wsgi or Nginx/uwsig, can be found in the package documentation: 
-
-src/postorius/doc/setup.rst
-src/postorius/doc/deployment.rst
+1. Clone the repository, create virtual environment.
 
 
-Acknowledgements
-================
+    git clone https://gitlab.com/systers/postorius.git
 
-Many thanks go out to Anna Senarclens de Grancy and Benedict Stein for
-developing the initial versions of this Django app during the Google Summer of
-Code 2010 and 2011.
+    cd postorius
+
+    virtualenv -p python3.5 venv
+
+    source venv/bin/activate
+
+
+2. Prepare database for project.
+
+
+    cd example_project
+
+    python manage.py migrate
+
+
+
+3. Create super user.
+
+
+
+    python manage.py createsuperuser
+
+
+
+Fill in the details prompted to create a super user.
+
+4. Run the development server.
+
+
+
+    python manage.py runserver
+
+
+
+**Please note**, the `live documentation <http://postorius.readthedocs.io/en/latest/development.html>`_ contains many other details that are important but may not be required for a successful setup, but you are strongly encouraged to visit the live documentation.
+
+
+If you face any issues while setting up Postorius locally, post your queries on the `#mailman3 <https://systers-opensource.slack.com/messages/C0QK5PCNS/>`_ slack channel.
+
+
+Documentation
+-------------
+
+A more comprehensive documentation for Postorius is generated using `Sphinx <http://sphinx-doc.org/>`_ and available online at http://postorius.readthedocs.io/en/latest/development.html and the general Mailman suite (which includes Postorius setup) at http://docs.mailman3.org/en/latest/prodsetup.html
+
+To build the documentation locally run:
+
+
+
+    cd src/postorius/
+
+    make -C doc html
+
+
+
+The HTML files will be available in the `doc/_build/html` directory.
+
+For more information on semantics and builds, please refer to the Sphinx `official documentation <http://sphinx-doc.org/contents.html>`_.
