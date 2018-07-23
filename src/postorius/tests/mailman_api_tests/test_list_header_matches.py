@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2016 by the Free Software Foundation, Inc.
+# Copyright (C) 2016-2018 by the Free Software Foundation, Inc.
 #
 # This file is part of Postorius.
 #
@@ -17,10 +17,11 @@
 
 """Tests for list header matches"""
 
-from __future__ import absolute_import, print_function, unicode_literals
 
+from allauth.account.models import EmailAddress
+from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from postorius.tests.utils import ViewTestCase
 
@@ -42,6 +43,9 @@ class ListHeaderMatchesTest(ViewTestCase):
             'testowner', 'owner@example.com', 'testpass')
         self.moderator = User.objects.create_user(
             'testmoderator', 'moderator@example.com', 'testpass')
+        for user in (self.user, self.superuser, self.owner, self.moderator):
+            EmailAddress.objects.create(
+                user=user, email=user.email, verified=True)
         self.mlist.add_owner('owner@example.com')
         self.mlist.add_moderator('moderator@example.com')
 
@@ -83,11 +87,15 @@ class ListHeaderMatchesTest(ViewTestCase):
         self.assertEqual(len(response.context["formset"]), 2)
         self.assertEqual(
             response.context["formset"].initial,
-            [{'header': u'testheader', 'pattern': u'testpattern',
-              'action': u'discard'}])
+            [{'header': 'testheader', 'pattern': 'testpattern',
+              'action': 'discard'}])
         self.assertContains(response, 'testheader')
         self.assertContains(response, 'testpattern')
-        self.assertContains(response, 'value="discard" selected="selected"')
+        soup = BeautifulSoup(response.content, "html.parser")
+        tag_form = soup.find("select", {"name": "form-0-action"})
+        self.assertIsNotNone(tag_form)
+        tag_option = tag_form.find("option", value="discard", selected=True)
+        self.assertIsNotNone(tag_option)
         # the new header match subform should not have ORDER or DELETE fields
         self.assertNotContains(response, 'form-1-ORDER')
         self.assertNotContains(response, 'form-1-DELETE')
@@ -153,7 +161,7 @@ class ListHeaderMatchesTest(ViewTestCase):
         self.assertHasNoMessage(response)
         self.assertEqual(
             response.context["formset"].errors,
-            [{'header': [u'Please enter a header.']}])
+            [{'header': ['Please enter a header.']}])
         self.assertEqual(len(self.mlist.header_matches), 0)
 
     def test_add_empty_pattern(self):
@@ -175,7 +183,7 @@ class ListHeaderMatchesTest(ViewTestCase):
         self.assertHasNoMessage(response)
         self.assertEqual(
             response.context["formset"].errors,
-            [{'pattern': [u'Please enter a pattern.']}])
+            [{'pattern': ['Please enter a pattern.']}])
         self.assertEqual(len(self.mlist.header_matches), 0)
 
     def test_edit(self):
@@ -236,8 +244,8 @@ class ListHeaderMatchesTest(ViewTestCase):
         self.assertHasNoMessage(response)
         self.assertEqual(
             response.context["formset"].errors,
-            [{'header': [u'Please enter a header.'],
-              'pattern': [u'Please enter a pattern.'],
+            [{'header': ['Please enter a header.'],
+              'pattern': ['Please enter a pattern.'],
               }, {}])
         self.assertEqual(len(self.mlist.header_matches), 1)
         hm = self.mlist.header_matches[0]

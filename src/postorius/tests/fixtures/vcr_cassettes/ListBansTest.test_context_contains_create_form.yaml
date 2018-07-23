@@ -3,122 +3,109 @@ interactions:
     body: mail_host=example.com
     headers:
       accept-encoding: ['gzip, deflate']
-      !!python/unicode content-type: [!!python/unicode application/x-www-form-urlencoded]
-    method: !!python/unicode POST
+      content-type: [application/x-www-form-urlencoded]
+    method: POST
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: !!python/unicode ''}
+    body: {string: ''}
     headers:
       content-length: ['0']
+      content-type: [application/json; charset=UTF-8]
       location: ['http://localhost:9001/3.0/domains/example.com']
     status: {code: 201, message: Created}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
+    method: GET
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: !!python/unicode '{"base_url": "http://example.com", "description":
-        null, "http_etag": "\"e736411818ff1815ca83575e0958c38c5188f0a4\"", "mail_host":
-        "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com",
-        "url_host": "example.com"}'}
+    body: {string: '{"alias_domain": null, "description": null, "http_etag": "\"492652d581dc93af101db450d81ae93a074bff49\"",
+        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com"}'}
     headers:
-      content-length: ['233']
-      content-type: [application/json; charset=utf-8]
+      content-length: ['194']
+      content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
     body: fqdn_listname=test_list%40example.com
     headers:
       accept-encoding: ['gzip, deflate']
-      !!python/unicode content-type: [!!python/unicode application/x-www-form-urlencoded]
-    method: !!python/unicode POST
+      content-type: [application/x-www-form-urlencoded]
+    method: POST
     uri: http://localhost:9001/3.0/lists
   response:
-    body: {string: !!python/unicode ''}
+    body: {string: ''}
     headers:
       content-length: ['0']
+      content-type: [application/json; charset=UTF-8]
       location: ['http://localhost:9001/3.0/lists/test_list.example.com']
     status: {code: 201, message: Created}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
-    uri: http://localhost:9001/3.0/users/test_superuser@example.com
+    method: GET
+    uri: http://localhost:9001/3.1/lists/test_list.example.com
   response:
-    body: {string: !!python/unicode 404 Not Found}
-    headers:
-      content-length: ['13']
-      content-type: [application/json; charset=utf-8]
-    status: {code: 404, message: Not Found}
-- request:
-    body: null
-    headers:
-      accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com
-  response:
-    body: {string: !!python/unicode '{"display_name": "Test_list", "fqdn_listname":
-        "test_list@example.com", "http_etag": "\"3f02dac6cf71a3be179af5064b09ce668186e785\"",
-        "list_id": "test_list.example.com", "list_name": "test_list", "mail_host":
-        "example.com", "member_count": 0, "self_link": "http://localhost:9001/3.0/lists/test_list.example.com",
-        "volume": 1}'}
+    body: {string: '{"display_name": "Test_list", "fqdn_listname": "test_list@example.com",
+        "http_etag": "\"a6dde4108c94a1ebe915704389125879a6cde4a2\"", "list_id": "test_list.example.com",
+        "list_name": "test_list", "mail_host": "example.com", "member_count": 0, "self_link":
+        "http://localhost:9001/3.1/lists/test_list.example.com", "volume": 1}'}
     headers:
       content-length: ['324']
-      content-type: [application/json; charset=utf-8]
+      content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
-    uri: http://localhost:9001/3.0/lists/test_list.example.com/bans
+    method: GET
+    uri: http://localhost:9001/3.1/lists/test_list.example.com/bans
   response:
-    body: {string: !!python/unicode '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
+    body: {string: '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
         "start": 0, "total_size": 0}'}
     headers:
       content-length: ['90']
-      content-type: [application/json; charset=utf-8]
+      content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
+    method: GET
     uri: http://localhost:9001/3.0/domains
   response:
-    body: {string: !!python/unicode '{"entries": [{"base_url": "http://example.com",
-        "description": null, "http_etag": "\"e736411818ff1815ca83575e0958c38c5188f0a4\"",
-        "mail_host": "example.com", "self_link": "http://localhost:9001/3.0/domains/example.com",
-        "url_host": "example.com"}], "http_etag": "\"c385b155f8da284bf78dbe075e20f58a30c893ab\"",
-        "start": 0, "total_size": 1}'}
+    body: {string: '{"entries": [{"alias_domain": null, "description": null, "http_etag":
+        "\"492652d581dc93af101db450d81ae93a074bff49\"", "mail_host": "example.com",
+        "self_link": "http://localhost:9001/3.0/domains/example.com"}], "http_etag":
+        "\"5868fb6d2442c0d163e0edb2bfd7a92b6c812796\"", "start": 0, "total_size":
+        1}'}
     headers:
-      content-length: ['338']
-      content-type: [application/json; charset=utf-8]
+      content-length: ['299']
+      content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode DELETE
+    method: DELETE
     uri: http://localhost:9001/3.0/domains/example.com
   response:
-    body: {string: !!python/unicode ''}
+    body: {string: ''}
     headers:
-      content-length: ['0']
+      Content-Length: ['0']
     status: {code: 204, message: No Content}
 - request:
     body: null
     headers:
       accept-encoding: ['gzip, deflate']
-    method: !!python/unicode GET
+    method: GET
     uri: http://localhost:9001/3.0/users
   response:
-    body: {string: !!python/unicode '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
+    body: {string: '{"http_etag": "\"32223434a0f3af4cdc4673d1fbc5bac1f6d98fd3\"",
         "start": 0, "total_size": 0}'}
     headers:
       content-length: ['90']
-      content-type: [application/json; charset=utf-8]
+      content-type: [application/json; charset=UTF-8]
     status: {code: 200, message: OK}
 version: 1

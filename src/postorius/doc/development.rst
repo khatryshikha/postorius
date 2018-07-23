@@ -28,6 +28,18 @@ An ideal workflow would be like this:
 3. Make a "merge request" to get your code reviewed and merged.
 
 
+First Contributions / Coverage Reports
+======================================
+
+If you don't know how you can contribute,
+writing tests is a good way to get you started.
+
+You can start by exploring the existing `test coverage`_
+and finding code that's not covered ie. not tested.
+
+.. _`test coverage`: https://mailman.gitlab.io/postorius/index.html
+
+
 Installing and running the tests
 ================================
 
@@ -64,7 +76,7 @@ directory. Please have a look at the existing examples.
 
 
 Mocking calls to Mailman's REST API
------------------------------------
+===================================
 
 A lot of Postorius' code involves calls to Mailman's REST API (through
 the mailman.client library). Running these tests against a real instance
@@ -82,7 +94,7 @@ cases for examples.
 
 In order to record new API responses for your test case, you need  to
 first start the mailman core, with the API server listening on port
-9001. You can use the ``testing/test_mailman.cfg`` file from the
+9001. You can use the ``example_project/mailman.cfg`` file from the
 Postorius source.
 
 .. note::
@@ -154,4 +166,4 @@ A quick example:
 
 For detailed information how to use mailmanclient, check out its documentation_.
 
-.. _documentation: https://gitlab.com/mailman/mailmanclient/blob/master/src/mailmanclient/docs/using.rst
+.. _documentation: http://docs.mailman3.org/projects/mailmanclient/en/latest/using.html
