@@ -1,0 +1,25 @@
+sudo: false
+
+language: python
+
+python:
+  - "3.5"
+  - "3.6"
+
+install:
+  - pip install tox-travis
+
+script:
+  - tox -e pep8
+  - >
+    if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
+      tox -e py36-django111
+      tox -e py36-django20
+      tox -e py36-django-latest
+    fi
+  - >
+    if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then
+      tox -e py36-django111
+      tox -e py36-django20
+    fi
+  - tox -e coverage
